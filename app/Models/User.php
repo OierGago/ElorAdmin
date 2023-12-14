@@ -19,8 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
         'password',
+        'address',
+        'phone',
+        'department_id'
     ];
 
     /**
@@ -42,4 +46,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($user) {
+            $alumnoRole = 'alumno';
+
+            $hasAlumnoRole = $user->roles()->where('name', $alumnoRole)->exists();
+
+            if ($hasAlumnoRole && count($user->roles) > 0) {
+                throw new \Exception('El usuario ya tiene el rol de alumno y no puede tener más roles.');
+            }
+        });
+    }
 }

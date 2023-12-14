@@ -13,6 +13,10 @@ class DepartmentController extends Controller
     public function index()
     {
         //
+        $departments = Department::All();
+        $departments = Department::orderBy('name', 'asc')->get();
+
+        return view('departments.index', ['departments' => $departments]);
     }
 
     /**
@@ -21,6 +25,8 @@ class DepartmentController extends Controller
     public function create()
     {
         //
+        $departments = Department::All();
+        return view('departmets.create', ['departments' => $departments]);
     }
 
     /**
@@ -29,6 +35,10 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         //
+        $department = new Department();
+        $department->name =  $request->name;
+        $department->save();
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -37,6 +47,7 @@ class DepartmentController extends Controller
     public function show(Department $department)
     {
         //
+        return view('departmets.show', ['department' => $department]);
     }
 
     /**
@@ -45,6 +56,7 @@ class DepartmentController extends Controller
     public function edit(Department $department)
     {
         //
+        return view('departmets.edit', ['department' => $department]);
     }
 
     /**
@@ -53,6 +65,9 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         //
+        $department->name = $request->name;
+        $department->save();
+        return view('departmets.show', ['department' => $department]);
     }
 
     /**
@@ -61,5 +76,11 @@ class DepartmentController extends Controller
     public function destroy(Department $department)
     {
         //
+
+        try {
+            $department->delete();
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'No se pudo borrar el departamento porque usuarios asignados');
+        }
     }
 }
