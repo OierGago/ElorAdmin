@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('role_id')->unsigned();
-            $table->unsignedBigInteger('user_id')->unsigned();
+        Schema::create('cycle_module', function (Blueprint $table) {
+            $table->unsignedBigInteger('cycle_id')->unsigned();
+            $table->unsignedBigInteger('module_id')->unsigned();
 
-            $table->unique(['role_id', 'user_id']);
-            $table->foreign('role_id')->references('id')->on('roles')
+            $table->unique(['cycle_id', 'module_id']);
+            $table->foreign('cycle_id')->references('id')->on('cycles')
                 ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->foreign('module_id')->references('id')->on('modules')
                 ->onDelete('cascade')->onUpdate('cascade');
 
-                $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -13,8 +13,6 @@ class CycleSeeder extends Seeder
      */
     public function run(): void
     {
-        Cycle::truncate();
-
         $cycleModel = new Cycle();
 
         $cycleModel->create([

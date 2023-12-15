@@ -21,12 +21,12 @@ return new class extends Migration
             $table->string('address');
             $table->integer('phone');
 
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles')
-                ->onDelete('cascade')->onUpdate('cascade');
-
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')
+                ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unsignedBigInteger('cycle_id');
+            $table->foreign('cycle_id')->references('id')->on('cycles')
                 ->onDelete('cascade')->onUpdate('cascade');
 
             $table->rememberToken();

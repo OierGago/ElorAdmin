@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
 
-            $table->unsignedBigInteger('cycle_id');
-            $table->foreign('cycle_id')->references('id')->on('cycles')
-                ->onDelete('cascade')->onUpdate('cascade');
-
             $table->timestamps();
         });
     }

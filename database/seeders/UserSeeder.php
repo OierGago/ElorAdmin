@@ -13,9 +13,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Eliminar usuarios existentes antes de ejecutar el seeder
-        User::truncate();
-
-        User::factory()->count(5)->create();
+        // User::factory()->count(1080)->create();
     }
 }

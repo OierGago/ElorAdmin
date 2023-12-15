@@ -2,21 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Module;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\RoleUser;
 
-class ModuleSeeder extends Seeder
+class RolesUsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $moduleModel = new Module();
-
-        $moduleModel->create([
-            'name' => 'Sistemas informáticos',
-        ]);
+        RoleUser::factory()->count(1000)->create(['role_id' => '3']);
+        RoleUser::factory()->count(80)->create(['role_id' => '2']);
     }
 }
