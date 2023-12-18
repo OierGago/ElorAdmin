@@ -13,6 +13,9 @@ class RoleController extends Controller
     public function index()
     {
         //
+        $roles = Role::orderBy('name','asc')->get();
+        return view('roles.index', ['roles' => $roles]);
+
     }
 
     /**
@@ -21,6 +24,9 @@ class RoleController extends Controller
     public function create()
     {
         //
+        $roles = Role::All();
+        return view('roles.create', ['roles' => $roles]);
+
     }
 
     /**
@@ -29,6 +35,10 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
+        $roles = new Role();
+        $roles->name =  $request->name;
+        $roles->save();
+        return redirect()->route('roles.index');
     }
 
     /**
@@ -37,6 +47,8 @@ class RoleController extends Controller
     public function show(Role $role)
     {
         //
+        return view('roles.show', ['role' => $role]);
+
     }
 
     /**
@@ -45,6 +57,8 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         //
+        return view('roles.edit', ['role' => $role]);
+
     }
 
     /**
@@ -53,6 +67,10 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         //
+        $role->name = $request->name;
+        $role->save();
+        return view('roles.show', ['role' => $role]);
+
     }
 
     /**
@@ -61,5 +79,10 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         //
+        try {
+            $role->delete();
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'No se pudo borrar el role ');
+        }
     }
 }

@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'address' => $faker->streetAddress(),
             'phone' => fake()->numerify('6########'),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make('Elorrieta00'),
             'remember_token' => Str::random(10),
             'department_id' => fake()->numberBetween(1,4),
             'cycle_id' => fake()->numberBetween(1,3)

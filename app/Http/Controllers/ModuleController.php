@@ -12,7 +12,8 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        //
+        $modules = Module::orderBy('created_at')->get();
+        return view('modules.index',['modules' => $modules]);
     }
 
     /**
@@ -20,7 +21,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        //
+        return view('modules.create');
     }
 
     /**
@@ -28,7 +29,10 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $module = new Module();
+        $module->name = $request->name;
+        $module->save();
+        return redirect()->route('modules.index');
     }
 
     /**
@@ -36,7 +40,7 @@ class ModuleController extends Controller
      */
     public function show(Module $module)
     {
-        //
+        return view('modules.show',['module'=>$module]);
     }
 
     /**
@@ -44,7 +48,7 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        //
+        return view('modules.edit',['module'=>$module]);
     }
 
     /**
@@ -52,7 +56,9 @@ class ModuleController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        //
+        $module->name = $request->name;
+        $module->save();
+        return view('modules.index',['module'=>$module]);
     }
 
     /**
@@ -60,6 +66,7 @@ class ModuleController extends Controller
      */
     public function destroy(Module $module)
     {
-        //
+        $module->delete();
+        return redirect()->route('modules.index');
     }
 }

@@ -65,6 +65,10 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         //
+        $request->validate([
+            'name' => 'required|String',
+            // Otros campos y reglas de validación según tus necesidades.
+        ]);
         $department->name = $request->name;
         $department->save();
         return view('departmets.show', ['department' => $department]);
@@ -80,7 +84,7 @@ class DepartmentController extends Controller
         try {
             $department->delete();
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'No se pudo borrar el departamento porque usuarios asignados');
+            return redirect()->back()->with('error', 'No se pudo borrar el departamento');
         }
     }
 }

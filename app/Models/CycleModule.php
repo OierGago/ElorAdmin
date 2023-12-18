@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoleUser extends Model
+class CycleModule extends Model
 {
     use HasFactory;
 
-    protected $table = 'role_user';
+    protected $table = 'cycle_module';
 
-    protected $primaryKey = 'role_id'; // Definir la clave primaria personalizada
+    protected $primaryKey = 'cycle_id'; // Definir la clave primaria personalizada
 
     // Si es necesario, definir el nombre del campo que representa la relación
-    protected $foreignKey = 'role_id';
+    protected $foreignKey = 'module_id';
 
 }

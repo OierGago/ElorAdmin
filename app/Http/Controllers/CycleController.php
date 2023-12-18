@@ -13,6 +13,8 @@ class CycleController extends Controller
     public function index()
     {
         //
+        $cycles =  Cycle::orderBy('name', 'asc')->get();
+        return view('cycles.index', ['cycles' => $cycles]);
     }
 
     /**
@@ -21,6 +23,7 @@ class CycleController extends Controller
     public function create()
     {
         //
+        return view('cycles.create');
     }
 
     /**
@@ -29,6 +32,11 @@ class CycleController extends Controller
     public function store(Request $request)
     {
         //
+        $cycle = new Cycle();
+        $cycle->name = $request->name;
+        $cycle->department_id = $request->department_id;
+        $cycle->save();
+        return redirect()->route('cycles.index');
     }
 
     /**
@@ -37,6 +45,7 @@ class CycleController extends Controller
     public function show(Cycle $cycle)
     {
         //
+        return view('cycles.show', ['cycle' => $cycle]);
     }
 
     /**
@@ -45,6 +54,7 @@ class CycleController extends Controller
     public function edit(Cycle $cycle)
     {
         //
+        return view('cycles.edit',  ['cycle' => $cycle]);
     }
 
     /**
@@ -53,6 +63,8 @@ class CycleController extends Controller
     public function update(Request $request, Cycle $cycle)
     {
         //
+        $cycle->name = $request->name;
+        $cycle->department_id = $request->department_id;
     }
 
     /**
@@ -61,5 +73,11 @@ class CycleController extends Controller
     public function destroy(Cycle $cycle)
     {
         //
+        try{
+            $cycle->delete();
+        }
+        catch(\Throwable $th){
+            return redirect()->back()-with('error', 'No se pudo borrar el cyclo');
+        }
     }
 }
