@@ -15,7 +15,7 @@ class CycleController extends Controller
     public function index()
     {
         //
-        $cycles = Cycle::orderBy('name', 'asc')->get();
+        $cycles = Cycle::orderBy('id', 'asc')->get();
         return response()->json(['cycles' => $cycles])
             ->setStatusCode(Response::HTTP_OK);
     }
@@ -36,7 +36,10 @@ class CycleController extends Controller
             $cycle->name = $request->name;
             $cycle->department_id = $request->department_id;
             $cycle->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
+            return response()->json([
+                'name' => $request->name,
+                'department_id' => $request->department_id
+            ], Response::HTTP_ACCEPTED);
         } catch (\Exception  $e) {
             return response()->json(['error' => 'Los campos no son validos', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -55,22 +58,30 @@ class CycleController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Cycle $cycle)
-    {
-        //
-        try {
-            $request->validate([
-                'name' => 'required|string',
-                'department_id' => 'required|integer'
-            ]);
+{
+    try {
+        $request->validate([
+            'name' => 'required|string',
+            'department_id' => 'required|integer'
+        ]);
 
-            $cycle->name = $request->name;
-            $cycle->department_id = $request->department_id;
-            $cycle->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
-        } catch (\Exception  $e) {
-            return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        if (!$cycle) {
+            return response()->json(['error' => 'Recurso no encontrado'], Response::HTTP_NOT_FOUND);
         }
+
+        $cycle->name = $request->name;
+        $cycle->department_id = $request->department_id;
+        $cycle->save();
+
+        return response()->json([
+            'name' => $request->name,
+            'department_id' => $request->department_id
+        ], Response::HTTP_ACCEPTED);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -80,9 +91,13 @@ class CycleController extends Controller
         //
         try {
             $cycle->delete();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
-        } catch (\Throwable $th) {
-            return response()->setStatusCode(Response::HTTP_NO_CONTENT);
+            return response()->json([
+                'Deleted'
+            ], Response::HTTP_NO_CONTENT);
+        } catch (\Exception  $e) {
+            return response()->json([
+                'error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()
+            ],Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

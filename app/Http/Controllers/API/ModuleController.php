@@ -14,7 +14,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::orderBy('created_at')->get();
+        $modules = Module::orderBy('id', 'asc')->get();
         return response()->json(['modules'=>$modules])->setStatusCode(Response::HTTP_OK);
     }
 
@@ -30,7 +30,9 @@ class ModuleController extends Controller
             $module = new Module();
             $module->name = $request->name;
             $module->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
+            return response()->json([
+                'name' => $request->name
+            ], Response::HTTP_ACCEPTED);
         } catch (\Exception  $e) {
             return response()->json(['error' => 'Los campos no son validos', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -55,7 +57,9 @@ class ModuleController extends Controller
             ]);
             $module->name = $request->name;
             $module->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
+            return response()->json([
+                'name' => $request->name
+            ], Response::HTTP_ACCEPTED);
         } catch (\Exception  $e) {
             return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -68,7 +72,9 @@ class ModuleController extends Controller
     {
         try {
             $module->delete();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
+            return response()->json([
+                'Se eliminó con exito'
+            ], Response::HTTP_ACCEPTED);
         } catch (\Throwable $th) {
             return response()->setStatusCode(Response::HTTP_NO_CONTENT);
         }

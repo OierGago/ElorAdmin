@@ -1,6 +1,5 @@
-@extends('layouts.app')
-@section('content')
-    <div class="Rectangle3">
+@extends('admin')
+@section('contenido')
 
         <div class="container">
             <div class="form_div">
@@ -15,11 +14,13 @@
                         @if (isset($department))
                             @method('PUT')
                         @endif
-                        <div class="form_input_div">
+                        <div class="form_input_di0 d-inline-flex">
                             <label for="name">Nombre de Departamento</label>
-                            <input type="text" name="name" id="name" required
-                                value="{{ old('nombre', $department->nombre ?? ' ') }}" />
+                            <input type="text" name="name" id="name" required value="{{ old('name', $department->name ?? '') }}" />
                         </div>
+                        <div class="btnce d-inline-flex">
+                        <button type="submit" class="btn btn-success btn-sm" name="">Guardar <i class="bi bi-bookmark-check"></i></button>
+        </div>
                     </form>
                 </div>
             </div>
@@ -31,7 +32,5 @@
                 </ol>
             </div>
         </div>
-    </div>
 
-    </div>
 @endsection

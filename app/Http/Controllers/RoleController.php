@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RoleController extends Controller
 {
@@ -13,8 +14,20 @@ class RoleController extends Controller
     public function index()
     {
         //
+        $roles = Role::All();
         $roles = Role::orderBy('name','asc')->get();
-        return view('roles.index', ['roles' => $roles]);
+        $roles = Role::paginate(2);
+        $customPaginator = new LengthAwarePaginator(
+            $roles->items(),
+            $roles->total(),
+            $roles->perPage(),
+            $roles->currentPage(),
+            [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => 'page',
+            ]
+        );
+        return view('roles.index', ['roles' => $roles], compact('customPaginator'));
 
     }
 

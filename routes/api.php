@@ -17,11 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+use App\Http\Controllers\API\AuthController;
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])
+->middleware('auth:sanctum');
 
 
 // AÑADIR LA RUTA DE LA BASE API
-use App\Http\Controllers\API\DepartmentController;
-Route::resource('departments', DepartmentController::class);
+use App\Http\Controllers\API\DepartmentApiController;
+
+Route::resource('departments', DepartmentApiController::class);
 
 use App\Http\Controllers\API\CycleController;
 Route::resource('cycles', CycleController::class);

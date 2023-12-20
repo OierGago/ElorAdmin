@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
         //
-        $roles = Role::orderBy('name', 'asc')->get();
+        $roles = Role::orderBy('id', 'asc')->get();
         return response()->json(['roles' => $roles])
             ->setStatusCode(Response::HTTP_OK);
     }
@@ -33,7 +33,7 @@ class RoleController extends Controller
             $role = new Role();
             $role->name = $request->name;
             $role->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
+            return response()->json([$request->name ], Response::HTTP_ACCEPTED);
         } catch (\Exception  $e) {
             return response()->json(['error' => 'Los campos no son validos', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -60,7 +60,7 @@ class RoleController extends Controller
             ]);
             $role->name = $request->name;
             $role->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
+            return response()->json([$request->name ], Response::HTTP_ACCEPTED);
         } catch (\Exception  $e) {
             return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }

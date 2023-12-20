@@ -8,14 +8,14 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class DepartmentController extends Controller
+class DepartmentApiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $departments = Department::orderBy('name', 'asc')->get();
+        $departments = Department::orderBy('id', 'asc')->get();
         return response()->json(['departments' => $departments])
             ->setStatusCode(Response::HTTP_OK);
     }
@@ -26,17 +26,13 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         //
-        try {
-            $request->validate([
-                'name' => 'required|string'
-            ]);
             $department = new Department();
             $department->name = $request->name;
             $department->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
-        } catch (\Exception  $e) {
-            return response()->json(['error' => 'Los campos no son validos', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+            return response()->json([
+                'name' => $request->name
+            ], Response::HTTP_ACCEPTED);
+
     }
 
     /**
@@ -54,17 +50,13 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         //
-         //
-        try {
-            $request->validate([
-                'name' => 'required|string'
-            ]);
+
             $department->name = $request->name;
             $department->save();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
-        } catch (\Exception  $e) {
-            return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+            return response()->json([
+                'name' => $request->name
+            ], Response::HTTP_ACCEPTED);
+
     }
 
     /**
@@ -75,7 +67,9 @@ class DepartmentController extends Controller
         //
         try {
             $department->delete();
-            return response()->setStatusCode(Response::HTTP_ACCEPTED);
+            return response()->json([
+                'Se eliminó con exito'
+            ], Response::HTTP_ACCEPTED);
         } catch (\Throwable $th) {
             return response()->setStatusCode(Response::HTTP_NO_CONTENT);
         }

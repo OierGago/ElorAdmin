@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class DepartmentController extends Controller
 {
@@ -15,8 +16,18 @@ class DepartmentController extends Controller
         //
         $departments = Department::All();
         $departments = Department::orderBy('name', 'asc')->get();
-
-        return view('departments.index', ['departments' => $departments]);
+        $departments = Department::paginate(2);
+        $customPaginator = new LengthAwarePaginator(
+            $departments->items(),
+            $departments->total(),
+            $departments->perPage(),
+            $departments->currentPage(),
+            [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => 'page',
+            ]
+        );
+        return view('departments.index', ['departments' => $departments], compact('customPaginator'));
     }
 
     /**
@@ -26,7 +37,7 @@ class DepartmentController extends Controller
     {
         //
         $departments = Department::All();
-        return view('departmets.create', ['departments' => $departments]);
+        return view('departments.create', ['departments' => $departments]);
     }
 
     /**
@@ -47,7 +58,7 @@ class DepartmentController extends Controller
     public function show(Department $department)
     {
         //
-        return view('departmets.show', ['department' => $department]);
+        return view('departments.show', ['department' => $department]);
     }
 
     /**
@@ -56,7 +67,8 @@ class DepartmentController extends Controller
     public function edit(Department $department)
     {
         //
-        return view('departmets.edit', ['department' => $department]);
+        $departments = Department::All();
+        return view('departments.create', ['department' => $department],['departments' => $departments]);
     }
 
     /**
@@ -65,13 +77,15 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         //
+        
+
         $request->validate([
             'name' => 'required|String',
             // Otros campos y reglas de validación según tus necesidades.
         ]);
         $department->name = $request->name;
         $department->save();
-        return view('departmets.show', ['department' => $department]);
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -79,10 +93,9 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
-
         try {
             $department->delete();
+            return redirect()->back();
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'No se pudo borrar el departamento');
         }

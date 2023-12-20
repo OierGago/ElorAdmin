@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cycle;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CycleController extends Controller
 {
@@ -12,9 +14,20 @@ class CycleController extends Controller
      */
     public function index()
     {
-        //
-        $cycles =  Cycle::orderBy('name', 'asc')->get();
-        return view('cycles.index', ['cycles' => $cycles]);
+        $cycles = Cycle::All();
+        $cycles = Cycle::orderBy('name', 'asc')->get();
+        $cycles = Cycle::paginate(2);
+        $customPaginator = new LengthAwarePaginator(
+            $cycles->items(),
+            $cycles->total(),
+            $cycles->perPage(),
+            $cycles->currentPage(),
+            [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => 'page',
+            ]
+        );
+        return view('cycles.index', ['cycles' => $cycles], compact('customPaginator'));
     }
 
     /**
@@ -22,8 +35,9 @@ class CycleController extends Controller
      */
     public function create()
     {
-        //
-        return view('cycles.create');
+        $departments = Department::All();
+        $cycles = Cycle::All();
+        return view('cycles.create', ['cycles' => $cycles , 'departments' => $departments]);
     }
 
     /**
@@ -34,7 +48,7 @@ class CycleController extends Controller
         //
         $cycle = new Cycle();
         $cycle->name = $request->name;
-        $cycle->department_id = $request->department_id;
+        $cycle->department_id = $request->input('department_id');
         $cycle->save();
         return redirect()->route('cycles.index');
     }
@@ -53,8 +67,10 @@ class CycleController extends Controller
      */
     public function edit(Cycle $cycle)
     {
-        //
-        return view('cycles.edit',  ['cycle' => $cycle]);
+        //ç
+        $departments = Department::All();
+        $cycles = Cycle::All();
+        return view('cycles.create', ['cycles' => $cycles , 'departments' => $departments , 'cycle' => $cycle]);
     }
 
     /**
@@ -65,6 +81,9 @@ class CycleController extends Controller
         //
         $cycle->name = $request->name;
         $cycle->department_id = $request->department_id;
+        $cycle->save();
+        return redirect()->route('cycles.index');
+ 
     }
 
     /**

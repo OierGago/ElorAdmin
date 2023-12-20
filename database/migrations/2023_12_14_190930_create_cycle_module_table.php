@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cycle_module', function (Blueprint $table) {
             $table->unsignedBigInteger('cycle_id')->unsigned();
             $table->unsignedBigInteger('module_id')->unsigned();
+            $table->integer('hour');
 
             $table->unique(['cycle_id', 'module_id']);
             $table->foreign('cycle_id')->references('id')->on('cycles')

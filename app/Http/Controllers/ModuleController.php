@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Module;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\Cycle;
 
 class ModuleController extends Controller
 {
@@ -12,8 +14,20 @@ class ModuleController extends Controller
      */
     public function index()
     {
+        $modules = Module::All();
         $modules = Module::orderBy('created_at')->get();
-        return view('modules.index',['modules' => $modules]);
+        $modules = Module::paginate(2);
+        $customPaginator = new LengthAwarePaginator(
+            $modules->items(),
+            $modules->total(),
+            $modules->perPage(),
+            $modules->currentPage(),
+            [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => 'page',
+            ]
+        );
+        return view('modules.index',['modules' => $modules], compact('customPaginator'));
     }
 
     /**
@@ -21,7 +35,9 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('modules.create');
+        $modules = Module::All();
+        $cycles = Cycle::OrderBy('name', 'asc')->get();
+        return view('modules.create', ['modules' => $modules ,'cycles' => $cycles]);
     }
 
     /**
@@ -30,7 +46,7 @@ class ModuleController extends Controller
     public function store(Request $request)
     {
         $module = new Module();
-        $module->name = $request->name;
+        $module->name = $request->input('cycle_id');
         $module->save();
         return redirect()->route('modules.index');
     }
@@ -48,7 +64,9 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        return view('modules.edit',['module'=>$module]);
+        $modules = Module::All();
+        $cycles = Cycle::OrderBy('name', 'asc')->get();
+        return view('modules.create',['cycles' => $cycles , 'modules' => $modules , 'module'=>$module],);
     }
 
     /**
@@ -58,7 +76,7 @@ class ModuleController extends Controller
     {
         $module->name = $request->name;
         $module->save();
-        return view('modules.index',['module'=>$module]);
+        return redirect()->route('modules.index');
     }
 
     /**
