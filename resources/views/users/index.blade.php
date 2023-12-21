@@ -2,8 +2,9 @@
 @section('contenido')
 <div class="">
 
-    <div class="infomacion">
+   
         <h1>Listado de Usuarios</h1>
+        <div class="container-fluid">
         <ul>
             @foreach ($users as $user)
             <li>
@@ -19,6 +20,7 @@
             </li>
             @endforeach
         </ul>
+        </div>
         <div class="paginacion">
             {{-- Mostrar enlace "Anterior" --}}
             @if ($customPaginator->onFirstPage())
@@ -39,6 +41,6 @@
             <a class="btn btn-success btn-sm float-right" href="{{ route('register') }}" role="button">Registar Usuario <i class="bi bi-plus-square"></i></a>
         </div>
         </div>
-    </div>
+    
 </div>
 @endsection
