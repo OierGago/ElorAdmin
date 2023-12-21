@@ -12,7 +12,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalUsers}}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="bi bi-person"></i>
+                                <h1><i class="bi bi-person"></i></h1>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalRoles}}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="bi bi-key"></i>
+                                <h1><i class="bi bi-key"></i></h1>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <i class="bi bi-book"></i>
+                                <h1><i class="bi bi-book"></i></h1>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalCycles }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="bi bi-journal"></i>
+                                <h1><i class="bi bi-journal"></i></h1>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalDepartment}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="bi bi-people"></i>
+                            <h1><i class="bi bi-people"></i></h1>
                         </div>
                     </div>
                 </div>
