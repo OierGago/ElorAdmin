@@ -1,29 +1,29 @@
 @extends('admin')
 @section('contenido')
 
+
+
 <div class="">
-    
+
 
     <h1>Listado de departamento</h1>
-    <table class="table">
+    <ul>
         @foreach ($departments as $department)
-        <tr>
-            <th scope="col">{{ $department->name }}</th>
-            <th>
-                <div class="btnce d-inline-flex">
-                    <a class="btn btn-warning btn-sm float-right" href="{{ route('departments.edit', $department) }}" role="button">Editar departamento <i class="bi bi-check-square"></i></a>
-                </div>
-            </th> 
-            <th>
-                <form class="d-inline-flex" action="{{route('departments.destroy',$department)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
-                </form>
-            </th>
-        </tr>
+        <li>
+            <p class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">{{ $department->name }}</p>
+            <div class="btnce d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">
+                <a class="btn btn-warning btn-sm float-right" href="{{ route('departments.edit', $department) }}"
+                    role="button">Editar departamento <i class="bi bi-pencil"></i></a>
+            </div>
+            <form class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12" action="{{route('departments.destroy',$department)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('¿Estas seguro?')">Borrar <i
+                        class="bi bi-trash3"></i></button>
+            </form>
+        </li>
         @endforeach
-    </table>
+    </ul>
     <div class="paginacion">
         @if ($customPaginator->onFirstPage())
         <span>Anterior</span>
@@ -40,8 +40,10 @@
     <div class="div-btn-crear d-inline-flex">
 
         <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('departments.create') }}" role="button">Crear departamento <i class="bi bi-check-square"></i></a>
+            <a class="btn btn-success btn-sm float-right" href="{{ route('departments.create') }}" role="button">Crear
+                departamento <i class="bi bi-plus-square"></i></a>
         </div>
     </div>
 </div>
+
 @endsection

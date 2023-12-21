@@ -8,6 +8,7 @@
             <li class="lista"><a href="/admin/cycles">Ciclos</a></li>
             <li class="lista"><a href="/admin/modules">Modulos</a></li>
             <li class="lista"><a href="/admin/roles">Roles</a></li>
+            <li class="lista"><a href="/admin/users">Usuario</a></li>
 
         </ul>
         <div class="barra_intermedia"></div>
@@ -20,6 +21,7 @@
     <div id="contentAdmin" class="contentAdmin">
         <!-- Contenido del área principal -->
         @yield('contenido')
+        
     </div>
 </div>
 @endsection

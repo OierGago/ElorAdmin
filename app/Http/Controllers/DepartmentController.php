@@ -16,7 +16,7 @@ class DepartmentController extends Controller
         //
         $departments = Department::All();
         $departments = Department::orderBy('name', 'asc')->get();
-        $departments = Department::paginate(2);
+        $departments = Department::paginate(15);
         $customPaginator = new LengthAwarePaginator(
             $departments->items(),
             $departments->total(),
@@ -27,7 +27,8 @@ class DepartmentController extends Controller
                 'pageName' => 'page',
             ]
         );
-        return view('departments.index', ['departments' => $departments], compact('customPaginator'));
+        $totalDepartment=Department::count();
+        return view('departments.index', ['departments' => $departments], compact('customPaginator','totalDepartment'));
     }
 
     /**

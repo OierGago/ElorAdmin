@@ -8,6 +8,23 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleUserController;
 use App\Http\Controllers\UserController;
 
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Cycle;
+use App\Models\Department;
+use App\Models\Module;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
+Route::get('/admin', function () {
+
+        $totalUsers = User::count();
+        $totalCycles = Cycle::count();
+        $totalRoles = Role::count();
+        $totalModules = Module::count();
+        $totalDepartment=Department::count();
+    return view('infoAdmin',  compact('totalDepartment','totalUsers','totalRoles','totalModules','totalCycles'));
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +40,7 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Route::get('/admin', function () {
-    return view('admin');
-});
+
 Route::middleware(['auth'])->group(function () {
     Route::resources([    ]);
     });
@@ -37,7 +52,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('cycles', CycleController::class);
     Route::resource('modules', ModuleController::class);
     Route::resource('roles', RoleController::class);
-    Route::resource('roleUsers', RoleUserController::class);
+    Route::resource('users', UserController::class);
     // ... otras rutas de administrador
 });
 

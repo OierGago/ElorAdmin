@@ -1,0 +1,43 @@
+.logo_elorrieta {
+    max-width: 50px; 
+    max-height: 50px; 
+    width: auto;
+    height: auto;
+}
+.logo-container {
+    margin-left: 20px;
+}
+.menu {
+    position: relative;
+    float: right;
+    margin-right: 20px;
+}
+
+.config-icon {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    right: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 120px;
+    z-index: 1000; /* Ajusta el valor según sea necesario para superponer otros elementos */
+    padding: 8px 0;
+}
+
+.menu:hover .dropdown {
+    display: block;
+    position: absolute;
+}
+
+.dropdown-item {
+    padding: 8px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+}

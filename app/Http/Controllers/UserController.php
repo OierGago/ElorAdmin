@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
@@ -13,6 +14,20 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+        $users = User::orderBy('name', 'asc')->get();
+        $users = User::paginate(15);
+        $customPaginator = new LengthAwarePaginator(
+            $users->items(),
+            $users->total(),
+            $users->perPage(),
+            $users->currentPage(),
+            [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => 'page',
+            ]
+        );
+        return view('users.index',['users'=>$users], compact('customPaginator'));
     }
 
     /**
@@ -61,5 +76,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        try {
+            $user->delete();
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'No se pudo borrar el usuario');
+        }
     }
 }

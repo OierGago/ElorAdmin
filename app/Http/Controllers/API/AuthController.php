@@ -21,14 +21,11 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'address' => 'required|string|max:255',
-
-            'phone' => 'required|integer|max:255',
-
+            'phone' => 'required|integer',
             'dni' => 'required|string|max:255',
-
-            'curso' => 'integer|max:255',
-            'department_id' => 'integer|max:255',
-            'cycle_id'=> 'integer|max:255'
+            'curso' => 'integer',
+            'department_id' => 'integer',
+            'cycle_id'=> 'integer'
 
         ]);
         $user = User::create([
@@ -37,6 +34,7 @@ class AuthController extends Controller
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'address' => $validatedData['address'],
+            'phone'=> $validatedData['phone'],
             'dni' => $validatedData['dni'],
             'curso' => $validatedData['curso'],
             'department_id' => $validatedData['department_id'],
@@ -61,15 +59,17 @@ class AuthController extends Controller
                 'message' => ['Username or password incorrect'],
             ])->setStatusCode(Response::HTTP_UNAUTHORIZED);
         }
+
+        
         // FIXME: queremos dejar más dispositivos?
         // $user->tokens()->delete();
+        $token = $user->createToken($request->email)->plainTextToken;
         return response()->json([
             'status' => 'success',
             'message' => 'User logged in successfully',
-            'name' => $user->name,
-            'token' => $user->createToken($request->device_name)
-                ->plainTextToken,
-        ]);
+            'name' => $user->name, 
+            'token' => $token,
+        ])->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
     public function logout(Request $request)

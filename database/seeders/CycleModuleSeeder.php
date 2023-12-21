@@ -192,91 +192,91 @@ class CycleModuleSeeder extends Seeder
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '1',
-            'hour'=>''
+            'hour'=>'264'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '30',
-            'hour'=>''
+            'hour'=>'198'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '2',
-            'hour'=>''
+            'hour'=>'99'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '3',
-            'hour'=>''
+            'hour'=>'198'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '4',
-            'hour'=>''
+            'hour'=>'132'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '5',
-            'hour'=>''
+            'hour'=>'99'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '6',
-            'hour'=>''
+            'hour'=>'120'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '7',
-            'hour'=>''
+            'hour'=>'120'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '9',
-            'hour'=>''
+            'hour'=>'100'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '8',
-            'hour'=>''
+            'hour'=>'60'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '10',
-            'hour'=>''
+            'hour'=>'100'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '11',
-            'hour'=>''
+            'hour'=>'50'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '12',
-            'hour'=>''
+            'hour'=>'40'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '13',
-            'hour'=>''
+            'hour'=>'60'
         ]);
 
         $CycleModuleModel->create([
             'cycle_id' => '3',
             'module_id'=> '14',
-            'hour'=>''
+            'hour'=>'360'
         ]);
     }
 }

@@ -3,15 +3,15 @@
 <div class="">
 
     <div class="infomacion">
-        <h1>Listado de modulos</h1>
+        <h1>Listado de Usuarios</h1>
         <ul>
-            @foreach ($modules as $module)
+            @foreach ($users as $user)
             <li>
-                <p class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">{{ $module->name }}</p>
+                <p class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">{{ $user->name }}, {{$user->surname}}</p>
                 <div class="btnce d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">
-                    <a class="btn btn-warning btn-sm float-right" href="{{ route('modules.edit', $module) }}" role="button">Editar módulo <i class="bi bi-pencil"></i></a>
+                    <p><a class="btn btn-warning btn-sm float-right" href="{{ route('users.edit', $user) }}" role="button">Editar usuario <i class="bi bi-pencil"></i></a></p>
                 </div>
-                <form class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12" action="{{route('modules.destroy',$module)}}" method="POST">
+                <form class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12" action="{{route('users.destroy',$user)}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('¿Estas seguro?')">Borrar <i class="bi bi-trash3"></i></button>
@@ -36,7 +36,7 @@
         </div>
         <div class="div-btn-crear d-inline-flex">
             <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('modules.create') }}" role="button">Crear módulo <i class="bi bi-plus-square"></i></a>
+            <a class="btn btn-success btn-sm float-right" href="{{ route('register') }}" role="button">Registar Usuario <i class="bi bi-plus-square"></i></a>
         </div>
         </div>
     </div>

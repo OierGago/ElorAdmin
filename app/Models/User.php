@@ -41,7 +41,8 @@ class User extends Authenticatable
         'password',
         'address',
         'phone',
-        'department_id'
+        'department_id',
+        'cycle_id'
     ];
 
     /**

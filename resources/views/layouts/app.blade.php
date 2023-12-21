@@ -8,21 +8,34 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ElorChat') }}</title>
 
     <!-- Fonts -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <style>
+
+    </style>
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
+    <!--<header>
+    <img src="{{ asset('images/logo_elorrieta.png') }}" alt="Logo de la página" class="logo">
+    </header>-->
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
 
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="logo-container">
+                <a href="{{ url('/') }}">
+                    <img src="{{ asset('images/logo_elorrieta.png') }}" alt="Logo de la página" class="logo_elorrieta">
+                </a>
+            </div>
+        <div class="container">
+        
                 <a class="navbar-brand" href="/admin">Panel de Administración</a>
 
                 <!-- <a class="navbar-brand" href="{{ url('/admin') }}">{{ config('app.name', 'Laravel') }}
@@ -36,11 +49,15 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                                                            <!--<div class="logo-container">
+                <img src="{{ asset('images/logo_elorrieta.png') }}" alt="Logo de la página" class="logo">
+                <div>-->    
                     <ul class="navbar-nav me-auto">
 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
@@ -74,16 +91,29 @@
                                     </form>
                                 </div>
                             </li>
+                            
                         @endguest
                     </ul>
                 </div>
-            </div>
-        </nav>
+            </div>        
+            <!-- ARREGLAR:
+            <div class="menu">
+    <span class="config-icon" onclick="toggleDropdown()">&#9881;</span>
+    <div class="dropdown" id="dropdownMenu">
+        <a href="#" class="dropdown-item">Opción 1</a>
+        <a href="#" class="dropdown-item">Opción 2</a>
+        <a href="#" class="dropdown-item">Opción 3</a>
+    </div>
+</div>-->
 
+ 
+        </div>
+        </nav>
         <main class="">
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/script_menu.js') }}"></script>
 </body>
 
 </html>
