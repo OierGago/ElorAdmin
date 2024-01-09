@@ -1,10 +1,8 @@
 @extends('admin')
 @section('contenido')
-<div class="">
-
-   
+<div class="container-fluid">
         <h1>Listado de Usuarios</h1>
-        <div class="container-fluid">
+        <div>
         <ul>
             @foreach ($users as $user)
             <li>
@@ -22,6 +20,11 @@
         </ul>
         </div>
         <div class="paginacion">
+            {{-- Mostrar enlace para ir a la primera página --}}
+            <a class="a_pagination" href="{{ $customPaginator->url(1) }}" rel="first">
+            <i class="bi bi-arrow-bar-left"></i>
+            </a>
+
             {{-- Mostrar enlace "Anterior" --}}
             @if ($customPaginator->onFirstPage())
                 <span>Anterior</span>
@@ -35,6 +38,11 @@
             @else
                 <span>Siguiente</span>
             @endif
+
+            {{-- Mostrar enlace para ir a la última página --}}
+            <a class="a_pagination" href="{{ $customPaginator->url($customPaginator->lastPage()) }}" rel="last">
+            <i class="bi bi-arrow-bar-right"></i>
+            </a>
         </div>
         <div class="div-btn-crear d-inline-flex">
             <div class="btnce">

@@ -1,27 +1,40 @@
 @extends('layouts.app')
 @section('content')
-<div id="containerAdmin" class="containerAdmin">
-    <div id="navAdmin" class="navAdmin">
-        <!-- Contenido de la navegación vertical -->
-        <ul>
-            <li class="lista"><a href="/admin/departments">Departamentos</a></li>
-            <li class="lista"><a href="/admin/cycles">Ciclos</a></li>
-            <li class="lista"><a href="/admin/modules">Modulos</a></li>
-            <li class="lista"><a href="/admin/roles">Roles</a></li>
-            <li class="lista"><a href="/admin/users">Usuario</a></li>
+    
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="/admin/departments" class="nav-link align-middle px-0">
+                        <i class="fs-4 bi-people"></i><span class="ms-1 d-none d-sm-inline">Departamentos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/cycles" class="nav-link align-middle px-0">
+                        <i class="fs-4 bi-journal"></i><span class="ms-1 d-none d-sm-inline">Ciclos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/modules" class="nav-link align-middle px-0">
+                        <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Modulos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/roles" class="nav-link align-middle px-0">
+                        <i class="fs-4 bi-key"></i><span class="ms-1 d-none d-sm-inline">Roles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/users" class="nav-link align-middle px-0">
+                        <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">Usuario</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="contentAdmin col-auto col-md-9 col-xl-10 px-sm-10">
+            <!-- Contenido del área principal -->
+            @yield('contenido')
+        </div>
 
-        </ul>
-        <div class="barra_intermedia"></div>
-    <ul>
-        <li  class="lista" >
-            <a  href="{{ route('register') }}">{{ __('Register') }}</a>
-        </li>
-   </ul>
-    </div>
-    <div id="contentAdmin" class="contentAdmin">
-        <!-- Contenido del área principal -->
-        @yield('contenido')
-        
-    </div>
-</div>
 @endsection

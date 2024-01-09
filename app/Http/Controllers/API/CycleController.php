@@ -58,29 +58,29 @@ class CycleController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Cycle $cycle)
-{
-    try {
-        $request->validate([
-            'name' => 'required|string',
-            'department_id' => 'required|integer'
-        ]);
+    {
+        try {
+            $request->validate([
+                'name' => 'required|string',
+                'department_id' => 'required|integer'
+            ]);
 
-        if (!$cycle) {
-            return response()->json(['error' => 'Recurso no encontrado'], Response::HTTP_NOT_FOUND);
+            if (!$cycle) {
+                return response()->json(['error' => 'Recurso no encontrado'], Response::HTTP_NOT_FOUND);
+            }
+
+            $cycle->name = $request->name;
+            $cycle->department_id = $request->department_id;
+            $cycle->save();
+
+            return response()->json([
+                'name' => $request->name,
+                'department_id' => $request->department_id
+            ], Response::HTTP_ACCEPTED);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
-        $cycle->name = $request->name;
-        $cycle->department_id = $request->department_id;
-        $cycle->save();
-
-        return response()->json([
-            'name' => $request->name,
-            'department_id' => $request->department_id
-        ], Response::HTTP_ACCEPTED);
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
-}
 
 
     /**

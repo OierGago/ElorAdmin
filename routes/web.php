@@ -6,6 +6,7 @@ use App\Http\Controllers\CycleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleUserController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
 
 use App\Models\Role;
@@ -37,9 +38,8 @@ Route::get('/admin', function () {
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('auth.login');
 });
-
 
 Route::middleware(['auth'])->group(function () {
     Route::resources([    ]);
@@ -62,7 +62,8 @@ Route::group(['prefix' => 'admin'], function () {
 //Route::resource('modules', ModuleController::class);
 //Route::resource('roles', RoleController::class);
 
-
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
 use Illuminate\Support\Facades\Auth;
 Auth::routes();

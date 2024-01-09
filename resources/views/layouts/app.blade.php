@@ -23,14 +23,10 @@
 </head>
 
 <body>
-    <!--<header>
-    <img src="{{ asset('images/logo_elorrieta.png') }}" alt="Logo de la página" class="logo">
-    </header>-->
     <div id="app">
-
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="logo-container">
-                <a href="{{ url('/') }}">
+                <a href="{{ url('/home') }}">
                     <img src="{{ asset('images/logo_elorrieta.png') }}" alt="Logo de la página" class="logo_elorrieta">
                 </a>
             </div>
@@ -41,17 +37,10 @@
                 <!-- <a class="navbar-brand" href="{{ url('/admin') }}">{{ config('app.name', 'Laravel') }}
                 </a> -->
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                                                            <!--<div class="logo-container">
-                <img src="{{ asset('images/logo_elorrieta.png') }}" alt="Logo de la página" class="logo">
-                <div>-->    
                     <ul class="navbar-nav me-auto">
 
                     </ul>
@@ -63,13 +52,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Inicio de sesión') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
                                 </li>
                             @endif
                         @else
@@ -83,7 +72,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar sesión') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -96,24 +85,48 @@
                     </ul>
                 </div>
             </div>        
-            <!-- ARREGLAR:
             <div class="menu">
-    <span class="config-icon" onclick="toggleDropdown()">&#9881;</span>
-    <div class="dropdown" id="dropdownMenu">
-        <a href="#" class="dropdown-item">Opción 1</a>
-        <a href="#" class="dropdown-item">Opción 2</a>
-        <a href="#" class="dropdown-item">Opción 3</a>
-    </div>
-</div>-->
-
+    <button class="btn dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="true">
+        <img src="{{ asset('images/settings_icon.png') }}" alt="Logo del menu de configuracion" class="logo_settings">
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+        <li class="dropdown-item dropdown-toggle dropdown-start">
+            <a href="#" class="submenu-toggle">Idioma</a>
+            <ul class="dropdown-menu dropdown-submenu">
+                <li class="dropdown-item">Euskera</li>
+                <li class="dropdown-item">Ingles</li>
+            </ul>
+        </li>
+        <li><a class="dropdown-item" href="#">Tema</a></li>
+        @auth
+        <li><a class="dropdown-item" href="#">Cambiar de contraseña</a></li>
+        @endauth
+    </ul>
+</div>
  
         </div>
         </nav>
         <main class="">
+            <div class="row">
             @yield('content')
+            </div>
         </main>
     </div>
     <script src="{{ asset('js/script_menu.js') }}"></script>
 </body>
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2023 Elorrieta-Errekamari</p>
 
+    <a href="https://www.elorrieta.eus/"><img src="{{ asset('images/title_elorrieta.png') }}" alt="Titulo de la empresa" class="title_elorrieta"></a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 1</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 2</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 3</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 4</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 5</a></li>
+    </ul>
+  </footer>
+</div>
 </html>

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="form_div">
                 <div class="title_div">
-                    <h2 class="title">Departamentos</h2>
+                    <h2 class="title">{{$department->name}}</h2>
                 </div>
                 <div class="labels_div">
                     <form class="" name="create"
@@ -15,8 +15,8 @@
                             @method('PUT')
                         @endif
                         <div class="form_input_di0 d-inline-flex">
-                            <label for="name">Nombre de Departamento</label>
-                            <input type="text" name="name" id="name" required value="{{ old('name', $department->name ?? '') }}" />
+                            <label for="name">Nombre del departamento</label>
+                            <input type="text" name="name" id="name" required/>
                         </div>
                         <div class="btnce d-inline-flex">
                         <button type="submit" class="btn btn-success btn-sm" name="">Guardar <i class="bi bi-bookmark-check"></i></button>
@@ -24,12 +24,13 @@
                     </form>
                 </div>
             </div>
+            <h3>Listado de departamentos</h3>
             <div class="list_div">
-                <ol>
+                <ul>
                     @foreach ($departments as $department)
                         <li>{{ $department->name }}</li>
                     @endforeach
-                </ol>
+                </ul>
             </div>
         </div>
 

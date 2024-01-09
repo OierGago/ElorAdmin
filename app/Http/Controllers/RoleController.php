@@ -16,7 +16,7 @@ class RoleController extends Controller
         //
         $roles = Role::All();
         $roles = Role::orderBy('name','asc')->get();
-        $roles = Role::paginate(2);
+        $roles = Role::paginate(15);
         $customPaginator = new LengthAwarePaginator(
             $roles->items(),
             $roles->total(),
@@ -70,7 +70,8 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         //
-        return view('roles.edit', ['role' => $role]);
+        $roles = Role::All();
+        return view('roles.edit', ['roles' => $roles, 'role' => $role]);
 
     }
 
@@ -82,7 +83,7 @@ class RoleController extends Controller
         //
         $role->name = $request->name;
         $role->save();
-        return view('roles.show', ['role' => $role]);
+        return redirect()->route('roles.index');
 
     }
 
@@ -94,6 +95,7 @@ class RoleController extends Controller
         //
         try {
             $role->delete();
+            return redirect()->back();
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'No se pudo borrar el role ');
         }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Module;
+use App\Models\Department;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $modules = Module::all();
+        $departments = Department::allU();
         return view('home');
     }
 }

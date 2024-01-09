@@ -16,7 +16,7 @@ class CycleController extends Controller
     {
         $cycles = Cycle::All();
         $cycles = Cycle::orderBy('name', 'asc')->get();
-        $cycles = Cycle::paginate(2);
+        $cycles = Cycle::paginate(15);
         $customPaginator = new LengthAwarePaginator(
             $cycles->items(),
             $cycles->total(),
@@ -70,7 +70,7 @@ class CycleController extends Controller
         //ç
         $departments = Department::All();
         $cycles = Cycle::All();
-        return view('cycles.create', ['cycles' => $cycles , 'departments' => $departments , 'cycle' => $cycle]);
+        return view('cycles.edit', ['cycles' => $cycles , 'departments' => $departments , 'cycle' => $cycle]);
     }
 
     /**

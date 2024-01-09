@@ -28,19 +28,36 @@
     </ul>
 
 </div>
-    <div class="paginacion">
-        @if ($customPaginator->onFirstPage())
-        <span>Anterior</span>
-        @else
-        <a class="a_pagination" href="{{ $customPaginator->previousPageUrl() }}" rel="prev">Anterior</a>
-        @endif
+<div class="paginacion">
+            {{-- Mostrar enlace para ir a la primera página --}}
+            <a class="a_pagination" href="{{ $customPaginator->url(1) }}" rel="first">
+            <i class="bi bi-arrow-bar-left"></i>
+            </a>
 
-        @if ($customPaginator->hasMorePages())
-        <a class="a_pagination" href="{{ $customPaginator->nextPageUrl() }}" rel="next">Siguiente</a>
-        @else
-        <span>Siguiente</span>
-        @endif
-    </div>
+            {{-- Mostrar enlace "Anterior" --}}
+            @if ($customPaginator->onFirstPage())
+                <span>Anterior</span>
+            @else
+                <a class="a_pagination" href="{{ $customPaginator->previousPageUrl() }}" rel="prev">Anterior</a>
+            @endif
+
+            {{-- Mostrar enlace "Siguiente" --}}
+            @if ($customPaginator->hasMorePages())
+                <a class="a_pagination" href="{{ $customPaginator->nextPageUrl() }}" rel="next">Siguiente</a>
+            @else
+                <span>Siguiente</span>
+            @endif
+
+            {{-- Mostrar enlace para ir a la última página --}}
+            <a class="a_pagination" href="{{ $customPaginator->url($customPaginator->lastPage()) }}" rel="last">
+            <i class="bi bi-arrow-bar-right"></i>
+            </a>
+        </div>
+        <div class="div-btn-crear d-inline-flex">
+            <div class="btnce">
+            <a class="btn btn-success btn-sm float-right" href="{{ route('register') }}" role="button">Registar Usuario <i class="bi bi-plus-square"></i></a>
+        </div>
+        </div>
     <div class="div-btn-crear d-inline-flex">
 
         <div class="btnce">

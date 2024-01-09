@@ -16,7 +16,7 @@ class ModuleController extends Controller
     {
         $modules = Module::All();
         $modules = Module::orderBy('created_at')->get();
-        $modules = Module::paginate(2);
+        $modules = Module::paginate(15);
         $customPaginator = new LengthAwarePaginator(
             $modules->items(),
             $modules->total(),
@@ -66,7 +66,7 @@ class ModuleController extends Controller
     {
         $modules = Module::All();
         $cycles = Cycle::OrderBy('name', 'asc')->get();
-        return view('modules.create',['cycles' => $cycles , 'modules' => $modules , 'module'=>$module],);
+        return view('modules.edit',['cycles' => $cycles , 'modules' => $modules , 'module'=>$module],);
     }
 
     /**

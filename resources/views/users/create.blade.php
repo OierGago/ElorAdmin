@@ -4,7 +4,7 @@
 <div class="container">
     <div class="form_div">
         <div class="title_div">
-            <h2 class="title">Modulos</h2>
+            <h2 class="title">{{$user->name}}</h2>
         </div>
         <div class="labels_div">
             <form class="" name="create"
@@ -15,17 +15,8 @@
                 @method('PUT')
                 @endif
                 <div class="form_input_div">
-                    <label for="name">Nombre de Modulo</label>
-                    <input type="text" name="name" id="name" required placeholder="Enter para crear"
-                        value="{{ old('name', $module->name ?? '') }}" />
-                </div>
-                <div class="form_input_div d-inline-flex">
-                    <label for="cycle_id">Ciclo asociado </label>
-                    <select name="cycle_id">
-                        @foreach ($cycles as $cycle)
-                        <option value="{{ $cycle->id }}">{{ $cycle->name }}</option>
-                        @endforeach
-                    </select>
+                    <label for="name">Nombre del usuario</label>
+                    <input type="text" name="name" id="name" required/>
                 </div>
                 <div class="btnce d-inline-flex">
                         <button type="submit" class="btn btn-success btn-sm" name="">Guardar <i class="bi bi-bookmark-check"></i></button>

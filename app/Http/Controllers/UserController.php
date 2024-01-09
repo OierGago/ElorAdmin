@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -35,7 +36,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::All();
+        return view('users.create', ['users' => $users]);
     }
 
     /**
@@ -43,7 +45,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->email = $request->input('email');
+        $user->address = $request->input('address');
+        $user->phone = $request->input('phone');
+        $user->roles = $request->input('role');
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -51,7 +61,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('users.show',['user'=>$user]);
     }
 
     /**
@@ -60,15 +70,51 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        return view('users.edit', ['user' => $user]);
+        $users = User::all();
+        $roles = Role::all();
+        return view('users.edit', ['users' => $users, 'user' => $user, 'roles'=> $roles]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+   /* public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->save();
+        return redirect()->route('users.index');
+    }
+    **/
+    public function update(Request $request, User $user){
+        // Validar los datos según tus necesidades
+        $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'phone' => 'required',
+            'roles' => 'array', // Asegúrate de que 'roles' sea un array
+        ]);
+
+        // Actualizar los campos básicos del usuario
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+
+        // Actualizar roles del usuario
+        $user->roles()->sync($request->roles);
+
+        // Guardar los cambios
+        $user->save();
+
+        // Redirigir a la vista de detalles del usuario o a donde desees
+        return redirect()->route('users.index', $user);
     }
 
     /**

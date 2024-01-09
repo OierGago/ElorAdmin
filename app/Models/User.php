@@ -20,12 +20,17 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'role_user');
     }
 
     public function cycle(): BelongsTo
     {
         return $this->belongsTo(Cycle::class);
+    }
+
+    public function hasRole($role)
+    {
+        return $this->roles->contains('name', $role);
     }
 
 
@@ -70,9 +75,9 @@ class User extends Authenticatable
         parent::boot();
 
         static::saving(function ($user) {
-            $alumnoRole = 'alumno';
+            $alumnoRole = 1;
 
-            $hasAlumnoRole = $user->roles()->where('name', $alumnoRole)->exists();
+            $hasAlumnoRole = $user->roles()->where('role_id', $alumnoRole)->exists();
 
             if ($hasAlumnoRole && count($user->roles) > 0) {
                 throw new \Exception('El usuario ya tiene el rol de alumno y no puede tener más roles.');

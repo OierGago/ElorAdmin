@@ -4,7 +4,7 @@
 <div class="container">
     <div class="form_div">
         <div class="title_div">
-            <h2 class="title">Ciclos</h2>
+            <h2 class="title">{{$cycle->name}}</h2>
         </div>
         <div class="labels_div">
             <form class="" name="create"
@@ -15,8 +15,8 @@
                 @method('PUT')
                 @endif
                 <div class="form_input_div">
-                    <label for="name">Nombre de Ciclo</label>
-                    <input type="text" name="name" id="name" required value="{{ old('nombre', $cycle->nombre ?? '') }}" />
+                    <label for="name">Nombre de ciclo</label>
+                    <input type="text" name="name" id="name" required/>
                 </div>
                 <div class="form_input_div d-inline-flex">
                     <label for="department_id">Departamento asociado</label>
@@ -32,12 +32,13 @@
             </form>
         </div>
     </div>
+    <h3>Listado de ciclos</h3>
     <div class="list_div">
-        <ol>
+        <ul>
             @foreach ($cycles as $cycle)
             <li>{{ $cycle->name }}</li>
             @endforeach
-        </ol>
+        </ul>
     </div>
 </div>
 

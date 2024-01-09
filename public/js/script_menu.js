@@ -2,46 +2,43 @@ document.addEventListener('DOMContentLoaded', function () {
     var dropdown = document.getElementById('dropdownMenu');
     var configIcon = document.querySelector('.config-icon');
 
-    var isMouseOverIcon = false;
-    var isMouseOverDropdown = false;
-
-    configIcon.addEventListener('mouseover', function () {
-        isMouseOverIcon = true;
-        showDropdown();
+    configIcon.addEventListener('click', function (event) {
+        event.stopPropagation(); // Evitar que el clic llegue al documento y cierre inmediatamente el menú
+        toggleDropdown();
     });
 
-    configIcon.addEventListener('mouseout', function () {
-        isMouseOverIcon = false;
+    document.addEventListener('click', function () {
         hideDropdown();
     });
 
-    dropdown.addEventListener('mouseover', function () {
-        isMouseOverDropdown = true;
-        showDropdown();
+    // Añadir evento para cerrar el menú al hacer clic fuera del menú
+    dropdown.addEventListener('click', function (event) {
+        event.stopPropagation(); // Evitar que el clic llegue al documento
+        // Aquí puedes agregar lógica adicional según la opción del menú en la que se haya hecho clic
     });
 
-    dropdown.addEventListener('mouseout', function () {
-        isMouseOverDropdown = false;
-        hideDropdown();
-    });
+    function toggleDropdown() {
+        if (dropdown.style.display === 'block') {
+            hideDropdown();
+        } else {
+            showDropdown();
+        }
+    }
 
     function showDropdown() {
-        if (isMouseOverIcon || isMouseOverDropdown) {
-            dropdown.style.display = 'block';
-        }
+        dropdown.style.display = 'block';
     }
 
     function hideDropdown() {
-        if (!isMouseOverIcon && !isMouseOverDropdown) {
-            dropdown.style.display = 'none';
-        }
+        dropdown.style.display = 'none';
     }
 
-    document.addEventListener('click', function (event) {
-        var isClickInside = configIcon.contains(event.target) || dropdown.contains(event.target);
-
-        if (!isClickInside) {
-            hideDropdown();
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        const submenuToggle = document.querySelector('.submenu-toggle');
+    
+        submenuToggle.addEventListener('mouseover', function () {
+            this.parentElement.querySelector('.dropdown-submenu').classList.toggle('show');
+            this.classList.toggle('collapsed');
+        });
     });
 });

@@ -4,6 +4,18 @@
     width: auto;
     height: auto;
 }
+.logo_settings {
+    max-width: 20px; 
+    max-height: 20px; 
+    width: auto;
+    height: auto;
+}
+.title_elorrieta {
+    max-width: 120px; 
+    max-height: 120px; 
+    width: auto;
+    height: auto;
+}
 .logo-container {
     margin-left: 20px;
 }
@@ -26,18 +38,52 @@
     background-color: #f9f9f9;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     min-width: 120px;
-    z-index: 1000; /* Ajusta el valor según sea necesario para superponer otros elementos */
+    z-index: 1000; 
     padding: 8px 0;
 }
 
-.menu:hover .dropdown {
+.menu:hover .dropdown,
+.dropdown.active  {
     display: block;
     position: absolute;
 }
 
-.dropdown-item {
-    padding: 8px;
-    text-decoration: none;
+.custom-dropdown {
+    left: -50px; 
+}
+.dropdown-menu li {
+    position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
     display: block;
-    color: #333;
+} 
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: auto;
+    right: 100%;
+    margin-top: -1px;
+}
+
+.submenu-toggle::after {
+    display: inline-block;
+    margin-left: 5px;
+    content: '\25B6'; /* Icono de flecha hacia la derecha (puedes cambiarlo según tu preferencia) */
+}
+
+.submenu-toggle.collapsed::after {
+    content: '\25BC'; /* Icono de flecha hacia abajo */
 }

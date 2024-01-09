@@ -12,6 +12,57 @@ use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
+    public function update(Request $request ,User $user)
+    {   
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'surname' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8',
+                'address' => 'required|string|max:255',
+                'phone' => 'required|integer',
+                'dni' => 'required|string|max:255',
+                'curso' => 'integer',
+                'department_id' => 'integer',
+                'cycle_id'=> 'integer'
+            ]);
+
+            if(!$user){
+                return response()->json(['error' => 'Recurso no encontrado'], Response::HTTP_NOT_FOUND);
+            }
+
+            $user->name = $request->name;
+            $user->surname = $request->surname;
+            $user-> email = $request->email;
+            $user-> password = $request->password;
+            $user-> address = $request->address;
+            $user-> phone = $request->phone;
+            $user-> dni = $request->dni;
+            $user-> curso = $request->curso;
+            $user-> department_id = $request->department_id;
+            $user-> cycle_id = $request->cycle_id;
+            $user -> save();
+
+            return response()->json([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'password' => $request->password,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'dni' => $request->dni,
+                'curso' => $request->curso,
+                'department_id' => $request->department_id,
+                'cycle_id' => $request->cycle_id
+
+            ], Response::HTTP_ACCEPTED);
+
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al procesar la solicitud', 'message' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
     public function register(Request $request)
     {
 

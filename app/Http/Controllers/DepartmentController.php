@@ -69,7 +69,7 @@ class DepartmentController extends Controller
     {
         //
         $departments = Department::All();
-        return view('departments.create', ['department' => $department],['departments' => $departments]);
+        return view('departments.edit', ['department' => $department],['departments' => $departments]);
     }
 
     /**
