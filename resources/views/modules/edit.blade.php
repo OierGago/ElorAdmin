@@ -16,7 +16,7 @@
                 @endif
                 <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
                     <label class="col-form-label" for="name">Nombre del módulo</label>
-                    <input class="form-control" type="text" name="name" id="name" required/>
+                    <input class="form-control" type="text" name="name" id="name" value="{{$module->name}}" required/>
                 </div>
                 <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
                     <label class="col-form-label" for="cycle_id">Ciclo asociado</label>

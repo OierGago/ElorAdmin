@@ -12,12 +12,19 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $users = User::all();
-        $users = User::orderBy('name', 'asc')->get();
-        $users = User::paginate(15);
+        $query = User::query();
+
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->input('search') . '%')
+                  ->orWhere('surname', 'like', '%' . $request->input('search') . '%')
+                  ->orWhere('dni', 'like', '%' . $request->input('search') . '%');
+        }
+    
+        $users = $query->paginate(12);
+
         $customPaginator = new LengthAwarePaginator(
             $users->items(),
             $users->total(),
@@ -52,6 +59,9 @@ class UserController extends Controller
         $user->address = $request->input('address');
         $user->phone = $request->input('phone');
         $user->roles = $request->input('role');
+        $user->dni = $request->input('dni');
+        $user->curso = $request->input('curso');
+        $user->fct = $request->input('fct');
         $user->save();
         return redirect()->route('users.index');
     }
@@ -98,6 +108,7 @@ class UserController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'roles' => 'array', // Asegúrate de que 'roles' sea un array
+            'dni' => 'required'
         ]);
 
         // Actualizar los campos básicos del usuario
@@ -106,6 +117,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->address = $request->address;
         $user->phone = $request->phone;
+        $user->dni = $request->dni;
 
         // Actualizar roles del usuario
         $user->roles()->sync($request->roles);
@@ -130,4 +142,6 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'No se pudo borrar el usuario');
         }
     }
+   
+
 }

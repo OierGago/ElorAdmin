@@ -46,6 +46,9 @@ class User extends Authenticatable
         'password',
         'address',
         'phone',
+        'dni',
+        'curso',
+        'fct',
         'department_id',
         'cycle_id'
     ];
@@ -83,5 +86,35 @@ class User extends Authenticatable
                 throw new \Exception('El usuario ya tiene el rol de alumno y no puede tener más roles.');
             }
         });
+    }
+    public static function obtenerUsuariosPorRolYCiclo($rol, $cycle)
+    {
+        // Obtener todos los usuarios que tienen un rol específico y pertenecen al ciclo dado
+        return User::whereHas('roles', function ($query) use ($rol) {
+                $query->where('name', $rol);
+            })
+            ->whereHas('cycle', function ($query) use ($cycle) {
+                $query->where('name', $cycle);
+            })
+            ->get();
+    }
+    public static function obtenerUsuariosPorRol($rol)
+    {
+        // Obtener todos los usuarios que tienen un rol específico
+        return User::whereHas('roles', function ($query) use ($rol) {
+            $query->where('name', $rol);
+        })->get();
+    }
+
+    public static function esUsuarioDeRol(User $usuario, $rol)
+    {
+        // Verificar si el usuario tiene un rol específico
+        return $usuario->hasRole($rol);
+    }
+
+    public static function asignarRolAUsuario(User $usuario, $rol)
+    {
+        // Asignar un rol específico al usuario
+        $usuario->roles()->attach(Role::where('name', $rol)->first());
     }
 }

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="form_div">
                 <div class="title_div">
-                    <h2 class="title">{{$department->name}}</h2>
+                    <h2 class="title">Departamentos</h2>
                 </div>
                 <div class="labels_div">
                     <form class="" name="create"

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cycle;
 use App\Models\Department;
+use App\Models\User;
+use App\Models\Module;
+
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -37,7 +40,7 @@ class CycleController extends Controller
     {
         $departments = Department::All();
         $cycles = Cycle::All();
-        return view('cycles.create', ['cycles' => $cycles , 'departments' => $departments]);
+        return view('cycles.create', ['cycles' => $cycles, 'departments' => $departments]);
     }
 
     /**
@@ -59,7 +62,15 @@ class CycleController extends Controller
     public function show(Cycle $cycle)
     {
         //
-        return view('cycles.show', ['cycle' => $cycle]);
+        $modules = Module::All();
+
+        //        $alumnos = User::obtenerUsuariosPorRolYCiclo('estudiante', $cycle->name);
+        $profesores = User::obtenerUsuariosPorRolYCiclo('profesor', $cycle->name);
+        $profesores = User::paginate(10);
+
+      
+
+        return view('cycles.show', ['cycle' => $cycle, 'modules' => $modules, 'profesores' => $profesores], compact('profesores'));
     }
 
     /**
@@ -70,7 +81,7 @@ class CycleController extends Controller
         //ç
         $departments = Department::All();
         $cycles = Cycle::All();
-        return view('cycles.edit', ['cycles' => $cycles , 'departments' => $departments , 'cycle' => $cycle]);
+        return view('cycles.edit', ['cycles' => $cycles, 'departments' => $departments, 'cycle' => $cycle]);
     }
 
     /**
@@ -83,7 +94,7 @@ class CycleController extends Controller
         $cycle->department_id = $request->department_id;
         $cycle->save();
         return redirect()->route('cycles.index');
- 
+
     }
 
     /**
@@ -92,11 +103,10 @@ class CycleController extends Controller
     public function destroy(Cycle $cycle)
     {
         //
-        try{
+        try {
             $cycle->delete();
-        }
-        catch(\Throwable $th){
-            return redirect()->back()-with('error', 'No se pudo borrar el cyclo');
+        } catch (\Throwable $th) {
+            return redirect()->back() - with('error', 'No se pudo borrar el cyclo');
         }
     }
 }

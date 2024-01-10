@@ -1,8 +1,6 @@
 @extends('admin')
 @section('contenido')
 
-
-
 <div class="">
 
 
@@ -11,11 +9,15 @@
         @foreach ($departments as $department)
         <li>
             <p class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">{{ $department->name }}</p>
-            <div class="btnce d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">
+            <div class="btnce d-inline-flex col-xl-2 col-md-2 col-sm-12">
+                        <a class="btn btn-primary btn-sm float-right" href="{{route('departments.show',$department)}}"
+                            role="button">Ver <i class="bi bi-eye"></i></a>
+                    </div>
+            <div class="btnce d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12">
                 <a class="btn btn-warning btn-sm float-right" href="{{ route('departments.edit', $department) }}"
-                    role="button">Editar departamento <i class="bi bi-pencil"></i></a>
+                    role="button">Editar <i class="bi bi-pencil"></i></a>
             </div>
-            <form class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12" action="{{route('departments.destroy',$department)}}" method="POST">
+            <form class="d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12" action="{{route('departments.destroy',$department)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('¿Estas seguro?')">Borrar <i

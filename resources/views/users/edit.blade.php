@@ -15,29 +15,29 @@
                     @method('PUT')
                     @endif
                     <div class=" row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
+                        <label class="col-form-label" for="dni">DNI</label>
+                        <input class="form-control" type="text" name="dni" id="dni" required value="{{$user->dni}}"/>
+                    </div>  
+                    <div class=" row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
                         <label class="col-form-label" for="name">Nombre</label>
                         <input class="form-control" type="text" name="name" id="name" required value="{{$user->name}}"/>
                     </div>
                     <div class=" row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
-                        <label class="col-form-label" for="name">Apellido</label>
+                        <label class="col-form-label" for="surname">Apellido</label>
                         <input class="form-control" type="text" name="surname" id="surname" required value="{{$user->surname}}"/>
                     </div>
                     <div class=" row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
-                        <label class="col-form-label" for="name">Mail</label>
+                        <label class="col-form-label" for="email">Mail</label>
                         <input class="form-control" type="text" name="email" id="email" required value="{{$user->email}}"/>
                     </div>
                     <div class=" row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
-                        <label class="col-form-label" for="name">Dirección</label>
+                        <label class="col-form-label" for="address">Dirección</label>
                         <input class="form-control" type="text" name="address" id="address" required value="{{$user->address}}"/>
                     </div>
                     <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
-                        <label class="col-form-label" for="name">Teléfono</label>
+                        <label class="col-form-label" for="phone">Teléfono</label>
                         <input class="form-control" type="text" name="phone" id="phone" required value="{{$user->phone}}"/>
                     </div>
-                    {{-- <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
-                        <label class="col-form-label" for="name">Rol</label>
-                        <input class="form-control" type="text" name="role" id="role" required value="{{$user->roles()->name}}"/>
-                    </div>  --}}
                     <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
                         <label class="col-form-label">Roles</label>
                         @foreach($roles as $role)

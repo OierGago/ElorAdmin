@@ -129,7 +129,16 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+
+                            <div class="row mb-3">
+                                <label for="fct" class="col-md-4 col-form-label text-md-end">{{ __('FCT') }}</label>
+
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="fct" name="fct">
+                                    </div>
+                                </div>
+                            </div>
 
                         <div class="row mb-3">
                             <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('Departamento') }}</label>

@@ -8,10 +8,14 @@
             @foreach ($modules as $module)
             <li>
                 <p class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">{{ $module->name }}</p>
-                <div class="btnce d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">
-                    <a class="btn btn-warning btn-sm float-right" href="{{ route('modules.edit', $module) }}" role="button">Editar módulo <i class="bi bi-pencil"></i></a>
+                <div class="btnce d-inline-flex col-xl-2 col-md-2 col-sm-12">
+                        <a class="btn btn-primary btn-sm float-right" href="{{route('modules.show',$module)}}"
+                            role="button">Ver <i class="bi bi-eye"></i></a>
+                    </div>
+                <div class="btnce d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12">
+                    <a class="btn btn-warning btn-sm float-right" href="{{ route('modules.edit', $module) }}" role="button">Editar <i class="bi bi-pencil"></i></a>
                 </div>
-                <form class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12" action="{{route('modules.destroy',$module)}}" method="POST">
+                <form class="d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12" action="{{route('modules.destroy',$module)}}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('¿Estas seguro?')">Borrar <i class="bi bi-trash3"></i></button>

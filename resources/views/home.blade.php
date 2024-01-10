@@ -1,42 +1,51 @@
-@extends('layouts.app') <!-- Asumiendo que tienes una plantilla principal -->
-
+@extends('layouts.app')
 @section('content')
 
-<div class="container">
-    <h1>Bienvenido {{ Auth::user()->name }}</h1>
+<div class="container-fluid">
+    <div class="form_div">
+        <div class="title_div">
+        </div>
+        <h1>Bienvenid@ {{ Auth::user()->name}}</h1>
 
-    @if(Auth::user()->hasRole('profesor'))
-        <h2>Información para Profesor</h2>
-        <p>Departamento: {{ $department }}</p>
-        <h3>Alumnos por Módulos:</h3>
-        @foreach ($alumnosPorModulos as $modulo => $alumnos)
-            <h4>{{ $modulo }}</h4>
-            <ul>
-                @foreach ($alumnos as $alumno)
-                    <li>{{ $alumno->name }} - {{ $alumno->email }}</li>
+            @if(Auth::user()->hasRole('Profesor'))
+            <h2>Información para Profesor</h2>
+                <p>Departamento: {{ Auth::user()->department->name }}</p>
+
+                @foreach ($cycles as $cycle)
+                    @if (Auth::user()->cycle_id == $cycle->id)
+                        <h3>Ciclo: {{ $cycle->name }}</h3>
+                        <h4>Módulos:</h4>
+                        <ul>
+                            @foreach ($cycle->modules as $module)
+                                <li>{{ $module->name }}</li>
+                                
+                                <ul>
+                                    @foreach ($users as $user)
+                                        @if($user->cycle->module = $module->name && $user->hasRole('Estudiante'))
+                                            
+                                            <li>{{ $user->name }} - {{ $user->email }}</li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @endforeach
+                        </ul>
+                    @endif  
                 @endforeach
-            </ul>
-        @endforeach
+            @elseif(Auth::user()->hasRole('Administrador'))
+                <h2>Información para Administrador</h2>
+            
 
-    @elseif(Auth::user()->hasRole('administrador'))
-        <h2>Información para Administrador</h2>
-        <p>Nº de Alumnos Totales: {{ $totalAlumnos }}</p>
-        <p>Nº de Personal: {{ $totalPersonal }}</p>
-        <!-- Mostrar otros datos necesarios -->
-
-    @elseif(Auth::user()->hasRole('alumno'))
-        <h2>Información para Alumno</h2>
-        <p>Ciclo Formativo: {{ $ciclo }}</p>
-        <h3>Módulos Matriculados:</h3>
-        @foreach ($modulosMatriculados as $modulo => $profesor)
-            <h4>{{ $modulo }}</h4>
-            <p>Profesor: {{ $profesor->name }}</p>
-            <p>Email: {{ $profesor->email }}</p>
-        @endforeach
-    @endif
-
-    <!-- Agrega cualquier otra sección que sea común para todos los usuarios -->
-
+            @elseif(Auth::user()->hasRole('Alumno'))
+                <h2>Información para Alumno</h2>
+                <p>Ciclo Formativo: {{ $ciclo }}</p>
+                <h3>Módulos Matriculados:</h3>
+                @foreach ($modulosMatriculados as $modulo => $Profesor)
+                    <h4>{{ $modulo }}</h4>
+                    <p>Profesor: {{ $profesor->name }}</p>
+                    <p>Email: {{ $profesor->email }}</p>
+                @endforeach
+            @endif         
+    </div>
 </div>
 
 @endsection

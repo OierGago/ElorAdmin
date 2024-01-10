@@ -7,10 +7,14 @@
         @foreach ($roles as $role)
         <li>
             <p class="d-inline-flex col-xl-3 col-md-3 col-sm-12 d-inline-flex">{{ $role->name }}</p>
-            <div class="btnce d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">
-                <a class="btn btn-warning btn-sm float-right" href="{{ route('roles.edit', $role) }}" role="button">Editar rol <i class="bi bi-pencil"></i></a>
+            <div class="btnce d-inline-flex col-xl-2 col-md-2 col-sm-12">
+                        <a class="btn btn-primary btn-sm float-right" href="{{route('roles.show',$role)}}"
+                            role="button">Ver <i class="bi bi-eye"></i></a>
+                    </div>
+            <div class="btnce d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12">
+                <a class="btn btn-warning btn-sm float-right" href="{{ route('roles.edit', $role) }}" role="button">Editar <i class="bi bi-pencil"></i></a>
             </div>
-            <form class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12" action="{{route('roles.destroy',$role)}}" method="POST">
+            <form class="d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12" action="{{route('roles.destroy',$role)}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('¿Estas seguro?')">Borrar <i class="bi bi-trash3"></i></button>
@@ -44,14 +48,16 @@
             </a>
         </div>
         <div class="div-btn-crear d-inline-flex">
-            <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('register') }}" role="button">Registar Usuario <i class="bi bi-plus-square"></i></a>
+        <div class="btnce">
+            <a class="btn btn-success btn-sm float-right" href="{{ route('register') }}" role="button">Registar Usuario
+                <i class="bi bi-plus-square"></i></a>
         </div>
-        </div>
-    <div class="div-btn-crear">
+    </div>
+    <div class="div-btn-crear d-inline-flex">
 
         <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('roles.create') }}" role="button">Crear rol <i class="bi bi-plus-square"></i></a>
+            <a class="btn btn-success btn-sm float-right" href="{{ route('roles.create') }}" role="button">Crear rol
+                <i class="bi bi-plus-square"></i></a>
         </div>
     </div>
 </div>

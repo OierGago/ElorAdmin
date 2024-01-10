@@ -17,31 +17,31 @@ class RoleSeeder extends Seeder
         $roleModel = new Role();
 
         $roleModel->create([
-            'name' => 'administrador'
+            'name' => 'Administrador'
         ]);
 
         $roleModel->create([
-            'name' => 'profesor'
+            'name' => 'Profesor'
         ]);
 
         $roleModel->create([
-            'name' => 'estudiante'
+            'name' => 'Estudiante'
         ]);
 
         $roleModel->create([
-            'name' => 'jefe de departamento'
+            'name' => 'Jefe de departamento'
         ]);
 
         $roleModel->create([
-            'name' => 'dirección'
+            'name' => 'Dirección'
         ]);
 
         $roleModel->create([
-            'name' => 'bedel'
+            'name' => 'Bedel'
         ]);
 
         $roleModel->create([
-            'name' => 'limpieza'
+            'name' => 'Limpieza'
         ]);
     }
 }

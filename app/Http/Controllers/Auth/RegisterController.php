@@ -10,6 +10,8 @@ use App\Models\Cycle;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -79,9 +81,24 @@ class RegisterController extends Controller
          return view('auth.register', compact('departments', 'cycles'));
      }
 
+     public function rules()
+    {
+        $rules = [
+            // ... otras reglas de validación ...
+
+            'curso' => ['required', Rule::in(['1', '2'])],
+        ];
+
+        // Si el curso es 2, agregar regla para el checkbox FCT
+        if ($this->input('curso') == 2) {
+            $rules['fct'] = 'nullable|boolean';
+        }
+
+        return $rules;
+    }
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
@@ -90,12 +107,17 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'dni' => $data['dni'],
             'curso' => $data['curso'],
+            // Si el elemento existe en el array devuelve true si no existe devuelve false
+            'fct' => array_key_exists('fct',$data),
             'department_id' => $data['department_id'],
             'cycle_id' => $data['cycle_id'],
-
-
-
-
         ]);
+
+        if ($data['curso'] == 1 && isset($data['fct'])) {
+            $user->fct = false;
+            $user->save();
+        }
+
+        return $user;
     }
 }

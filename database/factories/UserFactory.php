@@ -35,6 +35,9 @@ class UserFactory extends Factory
             'address' => $faker->streetAddress(),
             'phone' => fake()->numerify('6########'),
             'password' => static::$password ??= Hash::make('Elorrieta00'),
+            'dni' => fake()->numerify('########T'), 
+            'curso' => $faker->numberBetween(1,2),
+            'fct' => $faker->numberBetween(0,1),
             'remember_token' => Str::random(10),
             'department_id' => fake()->numberBetween(1,4),
             'cycle_id' => fake()->numberBetween(1,3)

@@ -23,15 +23,14 @@
 </head>
 
 <body>
-    <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="logo-container">
                 <a href="{{ url('/home') }}">
                     <img src="{{ asset('images/logo_elorrieta.png') }}" alt="Logo de la página" class="logo_elorrieta">
                 </a>
             </div>
-        <div class="container">
-        
+            <div class="container">
+
                 <a class="navbar-brand" href="/admin">Panel de Administración</a>
 
                 <!-- <a class="navbar-brand" href="{{ url('/admin') }}">{{ config('app.name', 'Laravel') }}
@@ -50,83 +49,99 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Inicio de sesión') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Inicio de sesión') }}</a>
+                        </li>
+                        @endif
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
+                        </li>
+                        @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Cerrar sesión') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Cerrar sesión') }}
-                                    </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            
                         @endguest
                     </ul>
                 </div>
-            </div>        
+            </div>
             <div class="menu">
     <button class="btn dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-        <img src="{{ asset('images/settings_icon.png') }}" alt="Logo del menu de configuracion" class="logo_settings">
+        <img src="{{ asset('images/settings_icon.png') }}" alt="Logo del menú de configuración" class="logo_settings">
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
         <li class="dropdown-item dropdown-toggle dropdown-start">
-            <a href="#" class="submenu-toggle">Idioma</a>
-            <ul class="dropdown-menu dropdown-submenu">
+            Idioma
+            <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
                 <li class="dropdown-item">Euskera</li>
-                <li class="dropdown-item">Ingles</li>
+                <li class="dropdown-item">Inglés</li>
             </ul>
         </li>
-        <li><a class="dropdown-item" href="#">Tema</a></li>
+        <li class="dropdown-item dropdown-toggle dropdown-start">
+            Tema
+            <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
+                <li class="dropdown-item">Claro</li>
+                <li class="dropdown-item">Oscuro</li>
+            </ul>
+        </li>
         @auth
         <li><a class="dropdown-item" href="#">Cambiar de contraseña</a></li>
+        <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="dropdown-item">Cerrar sesión</button>
+            </form>
+        </li>
         @endauth
     </ul>
 </div>
- 
-        </div>
-        </nav>
-        <main class="">
-            <div class="row">
+
+    </nav>
+   <div class="app">
+    <main class="">
+        <div class="row">
             @yield('content')
-            </div>
-        </main>
+        </div>
+        <div class="app2">
+            @yield('login')
+        </div>
+    </main>
+    </div>
+
     </div>
     <script src="{{ asset('js/script_menu.js') }}"></script>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-body-secondary">© 2023 Elorrieta-Errekamari</p>
+
+        <a href="https://www.elorrieta.eus/"><img src="{{ asset('images/title_elorrieta.png') }}"
+                alt="Titulo de la empresa" class="title_elorrieta"></a>
+
+        <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 1</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 2</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 3</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 4</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 5</a></li>
+        </ul>
+    </footer>
 </body>
-<div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <p class="col-md-4 mb-0 text-body-secondary">© 2023 Elorrieta-Errekamari</p>
 
-    <a href="https://www.elorrieta.eus/"><img src="{{ asset('images/title_elorrieta.png') }}" alt="Titulo de la empresa" class="title_elorrieta"></a>
-
-    <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 1</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 2</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 3</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 4</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Opcion 5</a></li>
-    </ul>
-  </footer>
-</div>
 </html>

@@ -1,3 +1,43 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.app2 {
+    margin-top: 10em;
+}
+.app {
+    flex: 1;
+}
+
+.moduleTitle{
+    padding-top: 5%;
+
+}
+.profesores{
+    display: grid;
+    align-content: center;
+    margin-left: 5%;
+    margin-right: 10%;
+    margin-top: 3%;
+}
+.space{
+    margin-right: 10%;
+}
+.modulos{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.margin-carousel{
+    margin-top: 10%;
+    margin-left: 35%;
+}
 .logo_elorrieta {
     max-width: 50px; 
     max-height: 50px; 
@@ -48,6 +88,9 @@
     position: absolute;
 }
 
+.dropdown-menu li:hover {
+    background-color: #c8c8c8;
+}
 .custom-dropdown {
     left: -50px; 
 }
@@ -86,4 +129,33 @@
 
 .submenu-toggle.collapsed::after {
     content: '\25BC'; /* Icono de flecha hacia abajo */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Establece el alto mínimo del cuerpo al 100% de la altura visible del viewport */
+    margin: 0;
+}
+
+.container {
+    flex: 1; /* Hace que el contenedor principal ocupe todo el espacio restante */
+}
+
+footer {
+    background-color: #f8f9fa; /* Cambia esto según el color de fondo deseado para el footer */
+    color: #343a40; /* Cambia esto según el color de texto deseado para el footer */
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+.table-with-padding {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-with-padding th,
+.table-with-padding td {
+    padding: 5px;
+    border: 1px solid #ddd; /* Agregar bordes para mejorar la apariencia */
 }
