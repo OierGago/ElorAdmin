@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\CycleRegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\RoleController;
+
+
 use App\Http\Controllers\RoleUserController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
@@ -53,6 +56,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('modules', ModuleController::class);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('cycleRegister', CycleRegisterController::Class);
     // ... otras rutas de administrador
 });
 
@@ -69,3 +73,9 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/users', [UserController::class, 'index2']);
+Route::get('/departments', [DepartmentController::class, 'index2']);
+
+Route::get('/cycles', [CycleController::class, 'index2']);
+

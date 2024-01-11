@@ -30,10 +30,26 @@ class DepartmentController extends Controller
                 'pageName' => 'page',
             ]
         );
-        $totalDepartment=Department::count();
-        return view('departments.index', ['departments' => $departments], compact('customPaginator','totalDepartment'));
+        $totalDepartment = Department::count();
+        return view('departments.index', ['departments' => $departments], compact('customPaginator', 'totalDepartment'));
     }
+    public function index2(Request $request)
+    {
 
+        $departments = Department::OrderBy('name', 'asc')->get();
+
+
+        foreach ($departments as $department) {
+            // Obtén los usuarios del departamento ordenados por apellido
+            $users = $department->users()->orderBy('surname', 'asc')->get();
+
+            // Añade los usuarios al departamento actual
+            $department->users = $users;
+        }
+
+        // Muestra la vista con la información de los departamentos y usuarios
+        return view('departments.index2', compact('departments'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -51,7 +67,7 @@ class DepartmentController extends Controller
     {
         //
         $department = new Department();
-        $department->name =  $request->name;
+        $department->name = $request->name;
         $department->save();
         return redirect()->route('departments.index');
     }
@@ -83,7 +99,7 @@ class DepartmentController extends Controller
     {
         //
         $departments = Department::All();
-        return view('departments.edit', ['department' => $department],['departments' => $departments]);
+        return view('departments.edit', ['department' => $department], ['departments' => $departments]);
     }
 
     /**
@@ -92,7 +108,7 @@ class DepartmentController extends Controller
     public function update(Request $request, Department $department)
     {
         //
-        
+
 
         $request->validate([
             'name' => 'required|String',

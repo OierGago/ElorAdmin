@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Cycle;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -36,6 +37,16 @@ class UserController extends Controller
             ]
         );
         return view('users.index',['users'=>$users], compact('customPaginator'));
+    }
+    public function index2(Request $request)
+    {   
+      
+       // $users = User::All();
+       
+        
+        $users = User::OrderBy('surname','asc')->paginate(15);
+       // $users = User::(15); 
+        return view('users.index2',['users' => $users],compact('users'));
     }
 
     /**
@@ -71,7 +82,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show',['user'=>$user]);
+        //$user = Auth::user()->load('department', 'cycle.modules', 'cycle.users');
+
+        $cycles = Cycle::all();
+    
+        return view('users.show', compact('user', 'cycles'));
     }
 
     /**

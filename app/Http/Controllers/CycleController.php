@@ -33,6 +33,12 @@ class CycleController extends Controller
         return view('cycles.index', ['cycles' => $cycles], compact('customPaginator'));
     }
 
+    public function index2(Request $request)
+    {   
+      
+        $cycles = Cycle::All();
+        return view('cycles.index2',['cycles' => $cycles]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -67,8 +73,6 @@ class CycleController extends Controller
         //        $alumnos = User::obtenerUsuariosPorRolYCiclo('estudiante', $cycle->name);
         $profesores = User::obtenerUsuariosPorRolYCiclo('profesor', $cycle->name);
         $profesores = User::paginate(10);
-
-      
 
         return view('cycles.show', ['cycle' => $cycle, 'modules' => $modules, 'profesores' => $profesores], compact('profesores'));
     }

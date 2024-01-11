@@ -13,6 +13,7 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
     <style>
 
     </style>
@@ -85,7 +86,7 @@
             </div>
             <div class="menu">
     <button class="btn dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="true">
-        <img src="{{ asset('images/settings_icon.png') }}" alt="Logo del menú de configuración" class="logo_settings">
+        <i class="bi bi-gear-fill"></i>
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
         <li class="dropdown-item dropdown-toggle dropdown-start">
