@@ -15,5 +15,13 @@ class CycleModule extends Model
 
     // Si es necesario, definir el nombre del campo que representa la relación
     protected $foreignKey = 'module_id';
+    public function cycle()
+    {
+        return $this->belongsTo(Cycle::class);
+    }
 
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }

@@ -15,5 +15,18 @@ class ProfessorCycle extends Model
 
     // Si es necesario, definir el nombre del campo que representa la relación
     protected $foreignKey = ['user_id', 'cycle_id', 'module_id'];
-    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function cycle()
+    {
+        return $this->belongsTo(Cycle::class);
+    }
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }

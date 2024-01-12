@@ -18,4 +18,11 @@ class Module extends Model
     {
         return $this->belongsToMany(CycleRegister::class);
     }
+
+    public function professorCycles()
+    {
+        return $this->hasMany(ProfessorCycle::class);
+        // Puedes agregar una relación adicional con CycleModule si es necesario
+        // return $this->hasMany(CycleModule::class);
+    }
 }

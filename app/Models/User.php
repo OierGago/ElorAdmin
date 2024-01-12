@@ -38,6 +38,11 @@ class User extends Authenticatable
     return $this->hasMany(CycleRegister::class);
 }
 
+public function professorCycles()
+    {
+        return $this->hasMany(ProfessorCycle::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
