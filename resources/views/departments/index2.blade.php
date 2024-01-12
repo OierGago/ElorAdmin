@@ -41,8 +41,8 @@
                         <table class="table-with-padding table table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col">Modulo</th>
-                                    <th scope="col">Apellido<th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Nombre</th>
                                     <th scope="col">DNI</th>
                                     <th scope="col">Telefono</th>
                                 </tr>
@@ -50,8 +50,8 @@
                             <tbody>
                                 @foreach ($department->users as $user)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
                                     <td>{{ $user->surname }}</td>
+                                    <td>{{ $user->name }}</td>
                                     <td>{{ $user->dni }}</td>
                                     <td>{{ $user->phone }}</td>
                                 </tr>

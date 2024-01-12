@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="container-fluid">
 
-    <h1 class="moduleTitle">Modulos de :{{$cycle->name}}</h1>
+    <h1 class="moduleTitle">Modulos de : {{$cycle->name}}</h1>
 
     <div class="modulos">
         @foreach ($cycle->modules as $modules)
@@ -24,7 +24,7 @@
             <tbody>
                 @foreach ($profesores as $profesor)
                 <tr>
-                    <td>{{$profesor->name}}</td>
+                    <td>{{$profesor->surname}}, {{$profesor->name}}</td>
                     <td>{{$profesor->email}}</td>
                     <td>{{$profesor->dni}}</td>
                     <td>
