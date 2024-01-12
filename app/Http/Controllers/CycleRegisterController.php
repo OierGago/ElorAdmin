@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Department;
+use App\Models\Cycle;
 use App\Models\CycleRegister;
 use Illuminate\Http\Request;
 
@@ -13,8 +16,10 @@ class CycleRegisterController extends Controller
     public function index()
     {
         //
+        $departments = Department::all();
+        $cycles = Cycle::all();
         $cycleRegister = CycleRegister::All();
-        return view('cycleRegister.index',['cycleRegister'=>$cycleRegister]);
+        return view('cycleRegister.index',['cycleRegister'=>$cycleRegister, 'departments'=>$departments, 'cycles'=> $cycles]);
     }
 
     /**

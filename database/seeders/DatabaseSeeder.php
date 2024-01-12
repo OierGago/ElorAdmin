@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Http\Controllers\ProfessorCycle;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesUsersSeeder::class,
             CycleModuleSeeder::class,
+            ProfessorCycle::class,
         ]);
     }
 }

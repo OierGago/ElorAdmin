@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -60,7 +61,9 @@ class RoleController extends Controller
     public function show(Role $role)
     {
         //
-        return view('roles.show', ['role' => $role]);
+        $roleUsers = User::obtenerUsuariosPorRol($role->name);
+        $users = User::all();
+        return view('roles.show', ['role' => $role, 'users'=>$users, 'roleUsers'=> $roleUsers]);
 
     }
 

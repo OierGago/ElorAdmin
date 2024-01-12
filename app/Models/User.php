@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->roles->contains('name', $role);
     }
 
+    public function cyclesRegisters()
+{
+    return $this->hasMany(CycleRegister::class);
+}
 
     /**
      * The attributes that are mass assignable.

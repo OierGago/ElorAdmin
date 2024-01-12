@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Models\Cycle;
 
 class ModuleController extends Controller
 {
@@ -16,7 +15,7 @@ class ModuleController extends Controller
     {
         $modules = Module::All();
         $modules = Module::orderBy('created_at')->get();
-        $modules = Module::paginate(15);
+        $modules = Module::paginate(12);
         $customPaginator = new LengthAwarePaginator(
             $modules->items(),
             $modules->total(),
@@ -36,8 +35,7 @@ class ModuleController extends Controller
     public function create()
     {
         $modules = Module::All();
-        $cycles = Cycle::OrderBy('name', 'asc')->get();
-        return view('modules.create', ['modules' => $modules ,'cycles' => $cycles]);
+        return view('modules.create', ['modules' => $modules]);
     }
 
     /**
@@ -46,7 +44,7 @@ class ModuleController extends Controller
     public function store(Request $request)
     {
         $module = new Module();
-        $module->name = $request->input('cycle_id');
+        $module->name = $request->name;
         $module->save();
         return redirect()->route('modules.index');
     }
@@ -64,9 +62,7 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        $modules = Module::All();
-        $cycles = Cycle::OrderBy('name', 'asc')->get();
-        return view('modules.edit',['cycles' => $cycles , 'modules' => $modules , 'module'=>$module],);
+        return view('modules.edit',['module'=>$module]);
     }
 
     /**
@@ -76,7 +72,7 @@ class ModuleController extends Controller
     {
         $module->name = $request->name;
         $module->save();
-        return redirect()->route('modules.index');
+        return view('modules.index',['module'=>$module]);
     }
 
     /**

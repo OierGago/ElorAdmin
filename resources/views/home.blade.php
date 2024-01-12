@@ -53,64 +53,62 @@
                 @endif
              @endforeach
 
+
+
              <div class="accordion" id="accordionExample">
-    @foreach ($cycles as $cycle)
-        @foreach ($professorCycles as $professorCycle)
-            @if ($cycle->id == $professorCycle->cycle_id && $professorCycle->user_id == Auth::user()->id)
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading{{ $cycle->id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse{{ $cycle->id }}" aria-expanded="true"
-                                aria-controls="collapse{{ $cycle->id }}">
-                            {{ $cycle->name }}
-                        </button>
-                    </h2>
-                    <div id="collapse{{ $cycle->id }}" class="accordion-collapse collapse"
-                         aria-labelledby="heading{{ $cycle->id }}" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            @foreach ($cycle->modules as $module)
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading{{ $module->id }}">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapse{{ $module->id }}" aria-expanded="true"
-                                                aria-controls="collapse{{ $module->id }}">
-                                            {{ $module->name }}
-                                        </button>
-                                    </h2>
-                                    <div id="collapse{{ $module->id }}" class="accordion-collapse collapse"
-                                         aria-labelledby="heading{{ $module->id }}">
-                                        <div class="accordion-body">
-                                            <table class="table-with-padding table table-borderless">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Nombre</th>
-                                                        <th scope="col">Correo Electrónico</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($cyclesRegisters as $cycleRegisterOne)
-                                                        @if ($cycleRegisterOne->module->name == $module->name && $cycleRegisterOne->pass == false && $cycleRegisterOne->pass == null)
+                    @foreach ($cycles as $cycle)
+                        @if($cycle->id ==  $professorCycles->cycle_id && $professorCycles->user_id == Auth::user()->id) 
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading{{ $cycle->id }}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse{{ $cycle->id }}" aria-expanded="true"
+                                            aria-controls="collapse{{ $cycle->id }}">
+                                        {{ $cycle->name }}
+                                    </button>
+                                </h2>
+                                <div id="collapse{{ $cycle->id }}" class="accordion-collapse collapse"
+                                    aria-labelledby="heading{{ $cycle->id }}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach ($cycle->modules as $module)
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="heading{{ $module->id }}">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#collapse{{ $module->id }}" aria-expanded="true"
+                                                            aria-controls="collapse{{ $module->id }}">
+                                                        {{ $module->name }}
+                                                    </button>
+                                                </h2>
+                                                <div id="collapse{{ $module->id }}" class="accordion-collapse collapse"
+                                                    aria-labelledby="heading{{ $module->id }}">
+                                                    <div class="accordion-body">
+                                                        <table class="table-with-padding table table-borderless">
+                                                            <thead>
                                                             <tr>
-                                                                <td>{{ $cycleRegisterOne->user->name }}</td>
-                                                                <td>{{ $cycleRegisterOne->user->email }}</td>
+                                                                <th scope="col">Nombre</th>
+                                                                <th scope="col">Correo Electrónico</th>
                                                             </tr>
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($cyclesRegisters as $cycleRegisterOne)
+                                                                    @if($cycleRegisterOne->module->name == $module->name && $cycleRegisterOne->pass == false && $cycleRegisterOne->pass == null)
+                                                                        <tr>
+                                                                            <td>{{ $cycleRegisterOne->user->name }}</td>
+                                                                            <td>{{ $cycleRegisterOne->user->email }}</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
-                    </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
-            @endif
-        @endforeach
-    @endforeach
-</div>
-
-
 
 
 

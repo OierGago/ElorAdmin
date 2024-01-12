@@ -11,6 +11,7 @@ use App\Models\Cycle;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\CycleRegister;
+use App\Models\ProfessorCycle;
 
 class HomeController extends Controller
 {
@@ -30,16 +31,20 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        
-        $modules = Module::all();
-        $departments = Department::all(); 
-        $cycles = Cycle::all();  
-        $users = User::all(); 
-        $roles = Role::all(); 
-        $cyclesRegisters = CycleRegister::all();
+{
+    $modules = Module::all();
+    $departments = Department::all();
+    $cycles = Cycle::all();
+    $users = User::all();
+    $roles = Role::all();
+    $cyclesRegisters = CycleRegister::all();
+    $professorCycles = ProfessorCycle::all();
 
-        // Pasa las variables a la vista
-        return view('home', compact('modules','departments','cycles','users', 'roles','cyclesRegisters'));
-    }
+    // Filtra los ciclos asociados al profesor actual
+    $professorCycles = $professorCycles->where('user_id', Auth::user()->id)->get();
+
+    // Pasa las variables a la vista
+    return view('home', compact('modules', 'departments', 'cycles', 'users', 'roles', 'cyclesRegisters', 'professorCycles'));
+}
+
 }
