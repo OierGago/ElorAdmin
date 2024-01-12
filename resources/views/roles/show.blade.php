@@ -26,6 +26,31 @@
         </li>
     @endforeach
     </ul>
+    <div class="paginacion">
+        {{-- Mostrar enlace para ir a la primera página --}}
+        <a class="a_pagination" href="{{ $customPaginator->url(1) }}" rel="first">
+            <i class="bi bi-arrow-bar-left"></i>
+        </a>
+
+        {{-- Mostrar enlace "Anterior" --}}
+        @if ($customPaginator->onFirstPage())
+        <span>Anterior</span>
+        @else
+        <a class="a_pagination" href="{{ $customPaginator->previousPageUrl() }}" rel="prev">Anterior</a>
+        @endif
+
+        {{-- Mostrar enlace "Siguiente" --}}
+        @if ($customPaginator->hasMorePages())
+        <a class="a_pagination" href="{{ $customPaginator->nextPageUrl() }}" rel="next">Siguiente</a>
+        @else
+        <span>Siguiente</span>
+        @endif
+
+        {{-- Mostrar enlace para ir a la última página --}}
+        <a class="a_pagination" href="{{ $customPaginator->url($customPaginator->lastPage()) }}" rel="last">
+            <i class="bi bi-arrow-bar-right"></i>
+        </a>
+    </div>
 </div>
 
 @endsection

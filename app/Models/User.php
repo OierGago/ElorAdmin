@@ -33,7 +33,7 @@ class User extends Authenticatable
         return $this->roles->contains('name', $role);
     }
 
-    public function cyclesRegisters()
+    public function cycleRegisters()
 {
     return $this->hasMany(CycleRegister::class);
 }

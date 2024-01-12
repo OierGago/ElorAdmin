@@ -25,4 +25,8 @@ class Cycle extends Model
     {
         return $this->belongsTo(Department::class);
     }
+    public function cycleRegisters()
+    {
+        return $this->belongsToMany(CycleRegister::class);
+    }
 }

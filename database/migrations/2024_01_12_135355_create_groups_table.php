@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('isPrivate');
-            $table->unsignedBigInteger('message_id')->unsigned();
-            $table->foreign('message_id')->references('id')->on('messages');
             $table->timestamps();
         });
     }

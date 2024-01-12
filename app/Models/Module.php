@@ -13,4 +13,9 @@ class Module extends Model
     {
         return $this->belongsToMany(Cycle::class);
     }
+
+    public function cycleRegisters()
+    {
+        return $this->belongsToMany(CycleRegister::class);
+    }
 }
