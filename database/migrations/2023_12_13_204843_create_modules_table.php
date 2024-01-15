@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->enum('year', ['1', '2']);
             
             $table->timestamps();
         });

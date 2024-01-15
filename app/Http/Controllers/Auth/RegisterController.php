@@ -60,9 +60,8 @@ class RegisterController extends Controller
             'address' => ['required','string', 'max:255'],
             'phone' => ['required','integer'],
             'dni' => ['required','string', 'max:10'],
-            'curso' => ['integer', 'max:255'],
+            'curso' => ['integer', 'max:255', 'nullable'],
             'department_id' => ['integer', 'max:255'],
-            'cycle_id' => ['integer', 'max:255'],
         ]);
     }
 
@@ -105,17 +104,17 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'phone' => $data['phone'],
             'dni' => $data['dni'],
-            'curso' => $data['curso'],
+            /*'curso' => $data['curso'],
             // Si el elemento existe en el array devuelve true si no existe devuelve false
             'fct' => array_key_exists('fct',$data),
             'department_id' => $data['department_id'],
-            'cycle_id' => $data['cycle_id'],
+            'cycle_id' => $data['cycle_id'],*/
         ]);
 
-        if ($data['curso'] == 1 && isset($data['fct'])) {
+        /*if ($data['curso'] == 1 && isset($data['fct'])) {
             $user->fct = false;
             $user->save();
-        }
+        }*/
 
         return $user;
     }

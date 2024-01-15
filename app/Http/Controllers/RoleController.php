@@ -60,21 +60,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
-        $roleUsers = User::obtenerUsuariosPorRol($role->name);
-        $users = User::all();
-        $roleUsers = User::paginate(15);
-        $customPaginator = new LengthAwarePaginator(
-            $roleUsers->items(),
-            $roleUsers->total(),
-            $roleUsers->perPage(),
-            $roleUsers->currentPage(),
-            [
-                'path' => LengthAwarePaginator::resolveCurrentPath(),
-                'pageName' => 'page',
-            ]
-            );
-        return view('roles.show', ['role' => $role, 'users'=>$users, 'roleUsers'=> $roleUsers], compact('customPaginator'));
+     
+        return view('roles.show', ['role' => $role]);
 
     }
 

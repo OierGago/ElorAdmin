@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Module;
+use App\Models\Cycle;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -62,7 +63,10 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        return view('modules.edit',['module'=>$module]);
+        $cycles = Cycle::all(); 
+        $modules = Module::all(); 
+
+        return view('modules.edit',['module'=>$module, 'modules'=>$modules, 'cycles' => $cycles]);
     }
 
     /**

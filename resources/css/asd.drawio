@@ -1,0 +1,28 @@
+<mxfile host="65bd71144e">
+    <diagram id="ssCV9Bg5jX4ErGwRnBpl" name="Page-1">
+        <mxGraphModel dx="555" dy="649" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Usuario (&lt;br&gt;id&lt;br&gt;name&lt;br&gt;surname,etc)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="240" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Conversacion (&lt;br&gt;id,&lt;br&gt;group_id(nullable))" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="260" y="440" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="CoversacionMiembro" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="380" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="Mensaje (&lt;br&gt;id&lt;br&gt;text&lt;br&gt;sender_id,&lt;br&gt;conversacion_id,&lt;br&gt;time)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="500" y="370" width="120" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="Grupo(&lt;br&gt;id, name)" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="570" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="La tabla Conversation puede representar tanto conversaciones individuales como grupales. Si el campo group_id es nulo, entonces la conversación es individual. Si group_id tiene un valor, entonces es una conversación grupal." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="550" width="320" height="230" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

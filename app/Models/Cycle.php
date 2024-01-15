@@ -13,12 +13,17 @@ class Cycle extends Model
 
     public function modules()
     {
-        return $this->belongsToMany(Module::class);
+        return $this->belongsToMany(Module::class, 'cycle_module');
     }
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'cycle_id');
+    }
+
+    public function usersCycleRegister()
+    {
+        return $this->belongsToMany(User::class, 'cycle_register');
     }
 
     public function department(): BelongsTo
@@ -27,13 +32,10 @@ class Cycle extends Model
     }
     public function cycleRegisters()
     {
-        return $this->belongsToMany(CycleRegister::class);
+        return $this->belongsToMany(CycleRegister::class, 'cycle_id');
     }
 
-    public function professorCycles()
-    {
-        return $this->hasMany(ProfessorCycle::class);
-        // Puedes agregar una relación adicional con CycleModule si es necesario
-        // return $this->hasMany(CycleModule::class);
+    public function professorCycles() {
+        return $this->hasMany(ProfessorCycle::class, 'cycle_id');
     }
 }

@@ -16,7 +16,7 @@
                         @endif
                         <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
                             <label class="col-form-label" for="name">Nombre del departamento</label>
-                            <input class="form-control" type="text" name="name" id="name" required/>
+                            <input class="form-control" type="text" value="{{$department->name}}" name="name" id="name" required/>
                         </div>
                         <div class="btnce d-inline-flex">
                         <button type="submit" class="btn btn-success btn-sm" name="">Guardar <i class="bi bi-bookmark-check"></i></button>

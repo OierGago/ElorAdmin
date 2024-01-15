@@ -34,16 +34,15 @@ class HomeController extends Controller
 {
     $modules = Module::all();
     $departments = Department::all();
-    //$cycles = Cycle::all();
-    //$users = User::all();
-    // $roles = Role::all();
-    // $cyclesRegisters = CycleRegister::all();
-    // $professorCycles = ProfessorCycle::all();
+    $cycles = Cycle::all();
+    $users = User::all();
+     $roles = Role::all();
+     $cyclesRegisters = CycleRegister::all();
+     $professorCycles = ProfessorCycle::all();
 
 
 
     // Pasa las variables a la vista
-    return view('home', compact('modules', 'departments'));
+    return view('home', compact('modules', 'departments','cycles', 'users','roles', 'cyclesRegisters','professorCycles'));
 }
-
 }

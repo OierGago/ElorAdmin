@@ -13,9 +13,19 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class);
+    }
+    
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function cycles()
+    {
+        return $this->belongsToMany(Cycle::class, 'cycle_register');
     }
 
     public function roles()
@@ -33,15 +43,17 @@ class User extends Authenticatable
         return $this->roles->contains('name', $role);
     }
 
-    public function cycleRegisters()
-{
-    return $this->hasMany(CycleRegister::class);
-}
-
-public function professorCycles()
+    public function scopeStudentsNotInCycleRegister($query)
     {
-        return $this->hasMany(ProfessorCycle::class);
+        return $query->whereHas('roles', function ($query)  {
+           $query->where('name', 'estudiante');
+        })->whereDoesntHave('cycles'); // Assuming 'cycles' is the relationship method for cycle_register in User model
     }
+
+    public function professorCycles() {
+        return $this->hasMany(ProfessorCycle::class, 'user_id');
+    }
+
 
     /**
      * The attributes that are mass assignable.

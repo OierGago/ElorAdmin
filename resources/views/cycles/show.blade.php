@@ -22,25 +22,23 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($profesores as $profesor)
-                <tr>
-                    <td>{{$profesor->surname}}, {{$profesor->name}}</td>
-                    <td>{{$profesor->email}}</td>
-                    <td>{{$profesor->dni}}</td>
-                    <td>
-                        <div class="btnce d-inline-flex col-xl-2 col-md-3 col-sm-12">
-                            <a class="btn btn-primary btn-sm float-right" href="{{route('users.show',$profesor)}}"
-                                role="button">Ver
-                                <i class="bi bi-eye"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                @foreach ($cycle->users as $profesor) 
+                    <tr>
+                        <td>{{$profesor->surname}}, {{$profesor->name}}</td>
+                        <td>{{$profesor->email}}</td>
+                        <td>{{$profesor->dni}}</td>
+                        <td>
+                            <div class="btnce d-inline-flex col-xl-2 col-md-3 col-sm-12">
+                                <a class="btn btn-primary btn-sm float-right" href="{{route('users.show',$profesor)}}"
+                                    role="button">Ver
+                                    <i class="bi bi-eye"></i></a>
+                            </div>
+                        </td>
+                    </tr>  
                 @endforeach
             </tbody>
         </table>
-        <div class="d-flex justify-content-end col space">
-            {!! $profesores->links('vendor.pagination.default') !!}
-        </div>
+       
     </div>
 </div>
 

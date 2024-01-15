@@ -70,11 +70,7 @@ class CycleController extends Controller
         //
         $modules = Module::All();
 
-        //        $alumnos = User::obtenerUsuariosPorRolYCiclo('estudiante', $cycle->name);
-        $profesores = User::obtenerUsuariosPorRolYCiclo('profesor', $cycle->name);
-        $profesores = User::paginate(10);
-
-        return view('cycles.show', ['cycle' => $cycle, 'modules' => $modules, 'profesores' => $profesores], compact('profesores'));
+        return view('cycles.show', ['cycle' => $cycle, 'modules' => $modules]);
     }
 
     /**

@@ -16,4 +16,12 @@ class RoleUser extends Model
     // Si es necesario, definir el nombre del campo que representa la relación
     protected $foreignKey = 'role_id';
 
+    public function role() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
 }

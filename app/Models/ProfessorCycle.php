@@ -15,18 +15,15 @@ class ProfessorCycle extends Model
 
     // Si es necesario, definir el nombre del campo que representa la relación
     protected $foreignKey = ['user_id', 'cycle_id', 'module_id'];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function cycle() {
+        return $this->belongsToMany(Cycle::class, 'cycles','cycle_id', 'id');
     }
 
-    public function cycle()
-    {
-        return $this->belongsTo(Cycle::class);
+    public function user() {
+        return $this->belongsToMany(User::class, 'users','user_id', 'id');
     }
 
-    public function module()
-    {
-        return $this->belongsTo(Module::class);
+    public function module() {
+        return $this->belongsToMany(Module::class, 'modules', 'module_id', 'id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Module extends Model
 {
@@ -19,10 +20,17 @@ class Module extends Model
         return $this->belongsToMany(CycleRegister::class);
     }
 
-    public function professorCycles()
+    public function cycleRegistersModulo()
     {
-        return $this->hasMany(ProfessorCycle::class);
-        // Puedes agregar una relación adicional con CycleModule si es necesario
-        // return $this->hasMany(CycleModule::class);
+        return $this->belongsToMany(CycleRegister::class, 'cycle_register', 'id', 'module_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'cycle_register');
+    }
+
+    public function professorCycles() {
+        return $this->hasMany(ProfessorCycle::class, 'module_id');
     }
 }

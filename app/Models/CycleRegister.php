@@ -12,7 +12,7 @@ class CycleRegister extends Model
     protected $table = 'cycle_register';
 
     // Definir la clave primaria personalizada
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = ['user_id'];
 
     public function users()
     {

@@ -16,7 +16,7 @@
                 @endif
                 <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
                     <label class="col-form-label" for="name">Nombre de ciclo</label>
-                    <input class="form-control" type="text" name="name" id="name" required/>
+                    <input class="form-control" value="{{$cycle->name}}" type="text" name="name" id="name" required/>
                 </div>
                 <div class="row form_input_div d-inline-flex col-xl-12 col-md-12 col-sm-12 col-form-label">
                     <label class="col-form-label" for="department_id">Departamento asociado</label>

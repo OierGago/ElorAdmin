@@ -77,7 +77,9 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        $users = User::where('department_id', $department->id)->orderBy('surname', 'asc')->paginate(15);
+      
+        $cycles = Cycle::where('department_id', $department->id)->orderBy('name', 'asc')->paginate(15);
+        $users = $department->users()->paginate(15);
         $customPaginator = new LengthAwarePaginator(
             $users->items(),
             $users->total(),
@@ -88,8 +90,8 @@ class DepartmentController extends Controller
                 'pageName' => 'page',
             ]
         );
-        $cycles = Cycle::where('department_id', $department->id)->orderBy('name', 'asc')->paginate(15);
-        return view('departments.show', compact('department', 'users', 'cycles', 'customPaginator'));
+
+        return view('departments.show', compact('department' ,'cycles', 'users', 'customPaginator'));
     }
 
     /**
