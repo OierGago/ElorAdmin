@@ -103,17 +103,6 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-   /* public function update(Request $request, User $user)
-    {
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
-        $user->save();
-        return redirect()->route('users.index');
-    }
-    **/
     public function update(Request $request, User $user){
         // Validar los datos según tus necesidades
         $request->validate([

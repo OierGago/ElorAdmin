@@ -57,18 +57,21 @@ class CycleRegisterController extends Controller
     public function store(Request $request)
     {
         //
-        $cycle_id= $request->cycle_id;
+        $cycle_id = $request->cycle_id;
         $cycle = Cycle::find($cycle_id);
         $modulos = $cycle->modules()->where('year', $request->curso)->get(); 
-        foreach($modulos as $modulo){
-            if(!($modulo->id == 14 && $request->fct != 'on')){
-                $cycle = new CycleRegister();
-                    $cycle->user_id =$request->user_id;
-                    $cycle->cycle_id =$request->cycle_id;
-                    $cycle->module_id =$modulo->id;
-                    $cycle->year =now()->year;
-                    $cycle->save();
-            } 
+
+        foreach ($modulos as $modulo) {
+            if (!($modulo->id == 14 && $request->fct != 'on')) {
+                $cycleRegister = new CycleRegister();
+                // dd($cycleRegister);
+                // FIXME El error salta cuando intentas asignar a cualquier atributo de la variable $cycleRegister
+                $cycleRegister->user_id = $request->user_id;
+                $cycleRegister->cycle_id = $request->cycle_id;
+                $cycleRegister->module_id = $modulo->id;
+                $cycleRegister->year = now()->year;
+                $cycleRegister->save();
+            }
         }
 
         return redirect()->route('cycleRegister.index');

@@ -23,11 +23,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 Route::get('/admin', function () {
 
         $totalUsers = User::count();
+        $alumnos = User::obtenerUsuariosPorRol('estudiante')->count();
+        $usuariosMatriculados = $alumnos - User::studentsNotInCycleRegister()->count();
         $totalCycles = Cycle::count();
         $totalRoles = Role::count();
         $totalModules = Module::count();
         $totalDepartment=Department::count();
-    return view('infoAdmin',  compact('totalDepartment','totalUsers','totalRoles','totalModules','totalCycles'));
+    return view('infoAdmin',  compact('totalDepartment','totalUsers','totalRoles','totalModules','totalCycles', 'usuariosMatriculados'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +80,3 @@ Route::get('/users', [UserController::class, 'index2']);
 Route::get('/departments', [DepartmentController::class, 'index2']);
 
 Route::get('/cycles', [CycleController::class, 'index2']);
-

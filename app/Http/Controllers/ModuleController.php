@@ -36,7 +36,8 @@ class ModuleController extends Controller
     public function create()
     {
         $modules = Module::All();
-        return view('modules.create', ['modules' => $modules]);
+        $cycles = Cycle::all();
+        return view('modules.create', ['modules' => $modules, 'cycles'=> $cycles]);
     }
 
     /**

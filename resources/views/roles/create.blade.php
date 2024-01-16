@@ -15,8 +15,8 @@
                             @method('PUT')
                         @endif
                         <div class="form_input_div d-inline-flex">
-                            <label for="name">Nombre del Rol</label>
-                            <input type="text" name="name" id="name" required placeholder="Enter para crear"  value="{{ old('name', $role->name ?? '') }}" />
+                            <label for="name">Nombre del Rol: </label>
+                            <input type="text" name="name" id="name" required value="{{ old('name', $role->name ?? '') }}" />
                         </div>
                         <div class="btnce d-inline-flex">
                         <button type="submit" class="btn btn-success btn-sm" name="">Guardar <i class="bi bi-bookmark-check"></i></button>

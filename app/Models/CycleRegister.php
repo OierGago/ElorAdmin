@@ -12,23 +12,24 @@ class CycleRegister extends Model
     protected $table = 'cycle_register';
 
     // Definir la clave primaria personalizada
-    protected $primaryKey = ['user_id'];
+    protected $primaryKey = ['user_id', 'cycle_id', 'module_id', 'year'];
 
     public function users()
     {
         // Definir la relación con la clave foránea 'user_id'
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'users', 'user_id', 'id');
     }
 
     public function cycles()
     {
         // Definir la relación con la clave foránea 'cycle_id'
-        return $this->belongsTo(Cycle::class, 'cycle_id');
+        return $this->belongsTo(Cycle::class, 'cycles', 'cycle_id', 'id');
     }
 
     public function modules()
     {
         // Definir la relación con la clave foránea 'module_id'
-        return $this->hasMany(Module::class, 'module_id');
+        return $this->belongsTo(Module::class, 'modules', 'module_id', 'id');
     }
+
 }

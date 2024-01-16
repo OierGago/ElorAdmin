@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('module_id')->unsigned();
             $table->unsignedBigInteger('year')->unsigned();
             $table->boolean('pass')->nullable();
-            $table->unique(['user_id', 'module_id']);
+            $table->unique(['user_id', 'cycle_id', 'module_id', 'year']);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('cycle_id')->references('id')->on('cycles');
             $table->foreign('module_id')->references('id')->on('modules');
