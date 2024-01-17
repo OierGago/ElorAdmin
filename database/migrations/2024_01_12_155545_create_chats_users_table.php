@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups_users', function (Blueprint $table) {
+        Schema::create('chats_users', function (Blueprint $table) {
         
-            $table->unsignedBigInteger('group_id')->unsigned();
+            $table->unsignedBigInteger('chat_id')->unsigned();
             $table->unsignedBigInteger('user_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('chat_id')->references('id')->on('chats');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unique(['group_id', 'user_id']);
+            $table->unique(['chat_id', 'user_id']);
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups_users');
+        Schema::dropIfExists('chats_users');
     }
 };

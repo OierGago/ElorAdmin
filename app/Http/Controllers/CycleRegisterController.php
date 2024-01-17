@@ -8,6 +8,7 @@ use App\Models\Cycle;
 use App\Models\User;
 use App\Models\CycleRegister;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CycleRegisterController extends Controller
 {
@@ -60,17 +61,16 @@ class CycleRegisterController extends Controller
         $cycle_id = $request->cycle_id;
         $cycle = Cycle::find($cycle_id);
         $modulos = $cycle->modules()->where('year', $request->curso)->get(); 
-
         foreach ($modulos as $modulo) {
             if (!($modulo->id == 14 && $request->fct != 'on')) {
-                $cycleRegister = new CycleRegister();
-                // dd($cycleRegister);
-                // FIXME El error salta cuando intentas asignar a cualquier atributo de la variable $cycleRegister
-                $cycleRegister->user_id = $request->user_id;
-                $cycleRegister->cycle_id = $request->cycle_id;
-                $cycleRegister->module_id = $modulo->id;
-                $cycleRegister->year = now()->year;
-                $cycleRegister->save();
+                DB::table('cycle_register')->insert(
+                    array(
+                           'user_id' => $request->user_id, 
+                           'cycle_id' => $request->cycle_id,
+                           'module_id' => $modulo->id,
+                           'year' => now()->year,
+                    )
+               );
             }
         }
 

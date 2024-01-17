@@ -33,11 +33,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_user');
     }
 
-    public function cycle(): BelongsTo
-    {
-        return $this->belongsTo(Cycle::class);
-    }
-
     public function hasRole($role)
     {
         return $this->roles->contains('name', $role);
@@ -47,7 +42,8 @@ class User extends Authenticatable
     {
         return $query->whereHas('roles', function ($query)  {
            $query->where('name', 'estudiante');
-        })->whereDoesntHave('cycles'); // Assuming 'cycles' is the relationship method for cycle_register in User model
+        })->whereDoesntHave('cycles')
+        ->orderBy('surname');
     }
 
     public function professorCycles() {
@@ -69,10 +65,7 @@ class User extends Authenticatable
         'address',
         'phone',
         'dni',
-        'curso',
-        'fct',
         'department_id',
-        'cycle_id'
     ];
 
     /**

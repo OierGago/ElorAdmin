@@ -1,21 +1,7 @@
 @extends('admin')
 @section('contenido')
 <div class="container-fluid">
-    <div class="form_div">
-        
-    {{--<div class="title_div">
-                <h1 class="title">Ciclos en el departamento {{$department->name}}:</h1>
-            </div>
-            <div class="list_div">
-                <ul>
-                    @forelse ($cycles as $cycle)
-                    <li>{{ $cycle->name }}</li>
-                    @empty
-                    No hay ciclos que pertenezcan de este departamento
-                    @endforelse
-                </ul>
-            </div>--}}
-    
+    <div class="form_div">    
     <div class="title_div">
             <h1 class="title">Usuarios en el departamento {{$department->name}}:</h1>
         </div>
@@ -31,13 +17,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($users as $user)
+                @forelse ($users as $user)
                     <tr>
                         <td>{{$user->surname}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->address}}</td>
-                        <td>{{$user->cycle->name}}</td>
+                        <td>
+                            @if($user->cycles->isNotEmpty())
+                                <?php $firstCycle = $user->cycles->first(); ?>
+                                {{ $firstCycle->name }}
+                            @else
+                                El usuario no esta matriculado en ningun ciclo.
+                            @endif
+                        </td>
                     </tr>
                     @empty
                     No hay usuarios asignados a este departamento

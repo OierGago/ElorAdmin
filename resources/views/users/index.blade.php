@@ -26,13 +26,63 @@
                     <p><a class="btn btn-warning btn-sm float-right" href="{{ route('users.edit', $user) }}"
                             role="button">Editar <i class="bi bi-pencil"></i></a></p>
                 </div>
-                <form class="d-inline-flex d-inline-flex col-xl-2 col-md-3 col-sm-12"
-                    action="{{route('users.destroy',$user)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-sm btn-danger" type="submit"
-                        onclick="return confirm('¿Estas seguro?')">Borrar <i class="bi bi-trash3"></i></button>
-                </form>
+
+                <button type="button" class="btn btn-warning btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyModal{{ $user->id }}">
+                    Editar <i class="bi bi-pencil"></i>
+                </button>
+
+                <button type="button" class="btn btn-sm btn-danger float-right" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $user->id }}">
+                    Borrar <i class="bi bi-trash3"></i>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal{{ $user->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteModalLabel">Warning</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Estás seguro de que deseas borrar usuario "{{ $user->name }}, {{$user->surname}} {{$user->dni}}"?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atrás</button>
+                                <form action="{{ route('users.destroy', $user) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modifyModal{{ $user->id }}" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="modifyModalLabel">Warning</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form class="" name="create" 
+                            action="@if (isset($user)) {{ route('users.update', $user) }} @else {{ route('users.store') }} @endif" 
+                            method="POST" enctype="multipart/form-data">
+                            <div class="modal-body">
+                                
+                                Estás seguro de que deseas borrar usuario "{{ $user->name }}, {{$user->surname}} {{$user->dni}}"?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atrás</button>
+                                
+                                    
+                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                               
+                            </div> 
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </li>
             @endforeach
         </ul>

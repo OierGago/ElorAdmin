@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-4 col-md-12 mb-4">
+        <div class="col-xl-4 col-md-12 col-sm-8 mb-4">
             <div class="card border-left border-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-md-12 mb-4">
+        <div class="col-xl-4 col-md-12 col-sm-8 mb-4">
             <div class="card border-left border-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -38,7 +38,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xl-4 col-md-12 mb-4">
+        <div class="col-xl-4 col-md-12 col-sm-8 mb-4">
             <div class="card border-left border-success shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -57,7 +57,7 @@
 
         
 
-        <div class="col-xl-4 col-md-12 mb-4">
+        <div class="col-xl-4 col-md-12 col-sm-8 mb-4">
             <div class="card border-left border-info shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -80,7 +80,7 @@
     </div>
 
     <div class="row">
-        <div class="col-xl-4 col-md-12 mb-4">
+        <div class="col-xl-4 col-md-12 col-sm-8 mb-4">
             <div class="card border-left border-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -97,7 +97,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-md-12 mb-4">
+        <div class="col-xl-4 col-md-12 col-sm-8 mb-4">
             <div class="card border-left border-danger shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">

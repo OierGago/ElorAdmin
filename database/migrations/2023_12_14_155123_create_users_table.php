@@ -21,13 +21,8 @@ return new class extends Migration
             $table->string('address');
             $table->integer('phone');
             $table->string('dni');
-            $table->integer('curso')->nullable();
-            $table->boolean('fct')->default(0);
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments')
-                ->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('cycle_id')->nullable();
-            $table->foreign('cycle_id')->references('id')->on('cycles')
                 ->onDelete('cascade')->onUpdate('cascade');
 
             $table->rememberToken();

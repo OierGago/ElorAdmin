@@ -20,7 +20,7 @@
                 </div>
                 <div class="btnce d-inline-flex">
                         <button type="submit" class="btn btn-success btn-sm" name="">Guardar <i class="bi bi-bookmark-check"></i></button>
-        </div>
+                </div>
             </form>
         </div>
     </div>

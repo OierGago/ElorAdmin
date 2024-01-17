@@ -14,11 +14,32 @@
             <div class="btnce d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12">
                 <a class="btn btn-warning btn-sm float-right" href="{{ route('roles.edit', $role) }}" role="button">Editar <i class="bi bi-pencil"></i></a>
             </div>
-            <form class="d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12" action="{{route('roles.destroy',$role)}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('¿Estas seguro?')">Borrar <i class="bi bi-trash3"></i></button>
-            </form>
+            <button type="button" class="btn btn-sm btn-danger float-right" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $role->id }}">
+                Borrar <i class="bi bi-trash3"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{ $role->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Estás seguro de que deseas borrar rol "{{ $role->name }}"?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atrás</button>
+                            <form action="{{ route('roles.destroy', $role) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </li>
         @endforeach
     </ul>

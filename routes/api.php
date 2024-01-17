@@ -43,3 +43,6 @@ Route::resource('roles', RoleController::class);
 
 use App\Http\Controllers\API\RoleUserController;
 Route::resource('roleUser', RoleUserController::class);
+
+use App\Http\Controllers\API\ImageController;
+Route::post('/uploadPhoto', [ImageController::class, 'uploadImage']);

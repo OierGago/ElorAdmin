@@ -20,8 +20,8 @@ return new class extends Migration
             $table->boolean('isSend');
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('group_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->unsignedBigInteger('chat_id')->unsigned();
+            $table->foreign('chat_id')->references('id')->on('chats');
             $table->timestamps();
         });
     }

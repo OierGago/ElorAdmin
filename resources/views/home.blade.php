@@ -32,66 +32,49 @@
             <h2>Información para Profesor</h2>
             <p>Departamento: {{ Auth::user()->department->name }}</p>
 
+                <p>Información de ProfessorCycle:</p>
+                
 
+
+
+    <div class="accordion" id="cycleAccordion">
+        @foreach($cycleName as $cycle)
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ $loop->index }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
+                        {{ $cycle->name }}
+                    </button>
+                </h2>
+                <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#cycleAccordion">
+                <?php
+            
+                        $modulesByCycle = DB::table("modules")
+                            ->distinct()
+                            ->join('professor_cycle', 'modules.id', '=', 'professor_cycle.module_id')
+                            ->select('modules.name')
+                            ->where([['professor_cycle.user_id','=', Auth::user()->id],
+                            ['professor_cycle.cycle_id' , '=', 'cycles.id']])
+                            ->get();
+                    ?>    
+                    <div class="accordion-body">
+                        @foreach($modulesByCycle as $module)
+                            <li>{{ $module->name }}</li>
+                        @endforeach
+                    
+                        <!-- Contenido específico del ciclo -->
+                        <!-- Puedes agregar más información aquí si es necesario -->
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+                {{-- Carga la relación 'module' --}}
+                
         
 
 
 
-            @foreach ($cycles as $cycle)
-                @foreach ($professorCycles as $professorCycle)
-                {{dd($professorCycle->cycle_id)}}
-                    @if($cycle->id ==  $professorCycle->cycle_id && $professorCycle->user_id == Auth::user()->id) 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading{{ $cycle->id }}">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse{{ $cycle->id }}" aria-expanded="true"
-                                        aria-controls="collapse{{ $cycle->id }}">
-                                    {{ $cycle->name }}
-                                </button>
-                            </h2>
-                            <div id="collapse{{ $cycle->id }}" class="accordion-collapse collapse"
-                                aria-labelledby="heading{{ $cycle->id }}" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    @foreach ($cycle->modules as $module)
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="heading{{ $module->id }}">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                        data-bs-target="#collapse{{ $module->id }}" aria-expanded="true"
-                                                        aria-controls="collapse{{ $module->id }}">
-                                                    {{ $module->name }}
-                                                </button>
-                                            </h2>
-                                            <div id="collapse{{ $module->id }}" class="accordion-collapse collapse"
-                                                aria-labelledby="heading{{ $module->id }}">
-                                                <div class="accordion-body">
-                                                    <table class="table-with-padding table table-borderless">
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col">Nombre</th>
-                                                            <th scope="col">Correo Electrónico</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($cyclesRegisters as $cycleRegisterOne)
-                                                                @if($cycleRegisterOne->module->name == $module->name && $cycleRegisterOne->pass == false && $cycleRegisterOne->pass == null)
-                                                                    <tr>
-                                                                        <td>{{ $cycleRegisterOne->user->name }}</td>
-                                                                        <td>{{ $cycleRegisterOne->user->email }}</td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-                @endforeach
+           
 
 
 

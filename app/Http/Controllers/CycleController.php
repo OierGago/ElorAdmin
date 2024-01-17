@@ -105,6 +105,7 @@ class CycleController extends Controller
         //
         try {
             $cycle->delete();
+            return redirect()->back();
         } catch (\Throwable $th) {
             return redirect()->back() - with('error', 'No se pudo borrar el cyclo');
         }
