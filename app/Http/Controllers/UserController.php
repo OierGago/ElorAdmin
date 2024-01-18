@@ -155,6 +155,13 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'No se pueden agregar roles adicionales a un usuario con el rol "Estudiante".');
             }
 
+            $containsEstudiante = in_array('3', $request->roles);
+
+            // Verificar si se está intentando asignar 'Estudiante' junto con otros roles
+            if ($containsEstudiante && count($request->roles) > 1) {
+                return redirect()->back()->with('error', 'No se puede asignar el rol "Estudiante" junto con otros roles.');
+            }
+
             // Actualizar los campos básicos del usuario
             $user->name = $request->name;
             $user->surname = $request->surname;
@@ -165,7 +172,6 @@ class UserController extends Controller
 
             // Actualizar roles del usuario
             $user->roles()->sync($request->roles);
-            
         }
 
         // Guardar los cambios
