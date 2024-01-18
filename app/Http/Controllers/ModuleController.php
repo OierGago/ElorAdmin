@@ -14,9 +14,11 @@ class ModuleController extends Controller
      */
     public function index()
     {
+        $pagination = config('PAGINATION_COUNT');
+
         $modules = Module::All();
         $modules = Module::orderBy('created_at')->get();
-        $modules = Module::paginate(12);
+        $modules = Module::paginate($pagination);
         $customPaginator = new LengthAwarePaginator(
             $modules->items(),
             $modules->total(),

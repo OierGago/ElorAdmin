@@ -33,13 +33,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->hasRole('Administrador')) {
+            return redirect('/admin');
+        }
+
         $modules = Module::all();
         $departments = Department::all();
     
         $cycleName = DB::table("cycles")
             ->distinct()
             ->join('professor_cycle', 'cycles.id', '=', 'professor_cycle.cycle_id')
-            ->select('cycles.name')
+            ->select('cycles.*')
             ->where('professor_cycle.user_id', Auth::user()->id)
             ->get();
 

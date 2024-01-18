@@ -14,10 +14,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $pagination = config('PAGINATION_COUNT');
+        
         $roles = Role::All();
         $roles = Role::orderBy('name','asc')->get();
-        $roles = Role::paginate(15);
+        $roles = Role::paginate($pagination);
         $customPaginator = new LengthAwarePaginator(
             $roles->items(),
             $roles->total(),
@@ -60,8 +61,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-     
-        $users = $role->users()->paginate(15);
+        $pagination = config('PAGINATION_COUNT');
+
+        $users = $role->users()->paginate($pagination);
 
         $customPaginator = new LengthAwarePaginator(
             $users->items(),

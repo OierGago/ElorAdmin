@@ -17,9 +17,12 @@ class CycleController extends Controller
      */
     public function index()
     {
+        $pagination = config('PAGINATION_COUNT');
+
         $cycles = Cycle::All();
+        $departments = Department::All();
         $cycles = Cycle::orderBy('name', 'asc')->get();
-        $cycles = Cycle::paginate(15);
+        $cycles = Cycle::paginate($pagination);
         $customPaginator = new LengthAwarePaginator(
             $cycles->items(),
             $cycles->total(),
@@ -30,7 +33,7 @@ class CycleController extends Controller
                 'pageName' => 'page',
             ]
         );
-        return view('cycles.index', ['cycles' => $cycles], compact('customPaginator'));
+        return view('cycles.index', ['cycles' => $cycles], compact('customPaginator','departments'));
     }
 
     public function index2(Request $request)

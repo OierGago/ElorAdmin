@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('image_path')->nullable();
             $table->double('latitude', 10, 6)->nullable();
             $table->double('longitude', 10, 6)->nullable();
-            $table->boolean('isSend');
+            $table->boolean('is_send');
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('chat_id')->unsigned();

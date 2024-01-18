@@ -27,65 +27,80 @@
     <div class="container-fluid">
         <div class="form_div">
             <h1>Bienvenid@ {{ Auth::user()->name}}</h1>
-
             @if(Auth::user()->hasRole('Profesor'))
             <h2>Información para Profesor</h2>
-            <p>Departamento: {{ Auth::user()->department->name }}</p>
-
-                <p>Información de ProfessorCycle:</p>
-                
-
-
-
-    <div class="accordion" id="cycleAccordion">
-        @foreach($cycleName as $cycle)
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="heading{{ $loop->index }}">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
-                        {{ $cycle->name }}
-                    </button>
-                </h2>
-                <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#cycleAccordion">
-                <?php
-            
-                        $modulesByCycle = DB::table("modules")
-                            ->distinct()
-                            ->join('professor_cycle', 'modules.id', '=', 'professor_cycle.module_id')
-                            ->select('modules.name')
-                            ->where([['professor_cycle.user_id','=', Auth::user()->id],
-                            ['professor_cycle.cycle_id' , '=', 'cycles.id']])
-                            ->get();
-                    ?>    
-                    <div class="accordion-body">
-                        @foreach($modulesByCycle as $module)
-                            <li>{{ $module->name }}</li>
-                        @endforeach
-                    
-                        <!-- Contenido específico del ciclo -->
-                        <!-- Puedes agregar más información aquí si es necesario -->
-                    </div>
+            <h5>Departamento: {{ Auth::user()->department->name }}</h5>
+                <div class="accordion" id="cycleAccordion">
+                    @foreach($cycleName as $cycle)
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ $loop->index }}">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
+                                    {{ $cycle->name }}
+                                </button>
+                            </h2>
+                            <div id="collapse{{ $loop->index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $loop->index }}" data-bs-parent="#cycleAccordion">
+                                <div class="accordion-body">
+                                    <?php
+                                    $modulesByCycle = DB::table("modules as m")->distinct()
+                                        ->join('professor_cycle as pc', 'm.id', '=', 'pc.module_id')
+                                        ->select('m.*')
+                                        ->where([
+                                            ['pc.cycle_id','=',$cycle->id],
+                                            ['pc.user_id', '=', Auth::user()->id],
+                                        ])
+                                        ->get();
+                                    ?>
+                                    @foreach($modulesByCycle as $module)
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingModule{{ $module->id }}">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseModule{{ $module->id }}" aria-expanded="true" aria-controls="collapseModule{{ $module->id }}">
+                                                    {{ $module->name }}
+                                                </button>
+                                            </h2>
+                                            <div id="collapseModule{{ $module->id }}" class="accordion-collapse collapse" aria-labelledby="headingModule{{ $module->id }}" data-bs-parent="#collapse{{ $loop->index }}">
+                                                <div class="accordion-body">
+                                                    <?php
+                                                    $studentByModule = DB::table("cycle_register as cr")
+                                                        ->join('modules as m', 'cr.module_id', '=', 'm.id')
+                                                        ->join('users as u', 'cr.user_id', '=', 'u.id')
+                                                        ->join('cycles as c', 'cr.cycle_id', '=', 'c.id')
+                                                        ->select('cr.*', 'u.*')
+                                                        ->where([
+                                                            ['m.id','=',$module->id],
+                                                            ['cr.cycle_id','=',$cycle->id],
+                                                            ['cr.year', '=',now()->year],
+                                                        ])
+                                                        ->get();
+                                                    ?>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Surname</th>
+                                                                    <th>Email</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach($studentByModule as $student)
+                                                                    <tr>
+                                                                        <td>{{ $student->name }}</td>
+                                                                        <td>{{ $student->surname}}</td>
+                                                                        <td>{{ $student->email }}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
-        @endforeach
-    </div>
-                {{-- Carga la relación 'module' --}}
-                
-        
-
-
-
-           
-
-
-
-
-
-
-
-            @elseif(Auth::user()->hasRole('Administrador'))
-            <h2>Información para Administrador</h2>
-
-
             @elseif(Auth::user()->hasRole('Estudiante'))
             <h2>Información para Alumno</h2>
             <p>Ciclo Formativo: {{ Auth::user()->cycle->name}}</p>

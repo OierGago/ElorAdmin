@@ -12,6 +12,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        config(['PAGINATION_COUNT' => 15]);
     }
 
     /**

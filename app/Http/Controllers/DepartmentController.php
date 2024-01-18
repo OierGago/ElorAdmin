@@ -77,9 +77,10 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-      
+        $pagination = config('PAGINATION_COUNT');
+
         $cycles = Cycle::where('department_id', $department->id)->orderBy('name', 'asc')->paginate(15);
-        $users = $department->users()->paginate(15);
+        $users = $department->users()->paginate($pagination);
         $customPaginator = new LengthAwarePaginator(
             $users->items(),
             $users->total(),

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
@@ -32,6 +33,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'role_user');
     }
+    public function cycleRegisters()
+    {
+        return $this->hasMany(CycleRegister::class, 'user_id');
+    }
 
     public function hasRole($role)
     {
@@ -40,10 +45,17 @@ class User extends Authenticatable
 
     public function scopeStudentsNotInCycleRegister($query)
     {
-        return $query->whereHas('roles', function ($query)  {
-           $query->where('name', 'estudiante');
-        })->whereDoesntHave('cycles')
-        ->orderBy('surname');
+        $currentYear = now()->year;
+
+    return $query->whereHas('roles', function ($query) {
+        $query->where('name', 'estudiante');
+    })->where(function ($query) use ($currentYear) {
+        $query->doesntHave('cycleRegisters')
+            ->orWhereHas('cycleRegisters', function ($query) use ($currentYear) {
+                $query->where('year', '<>', $currentYear);
+            });
+    })
+    ->orderBy('surname');
     }
 
     public function professorCycles() {
@@ -92,15 +104,7 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        static::saving(function ($user) {
-            $alumnoRole = 1;
-
-            $hasAlumnoRole = $user->roles()->where('role_id', $alumnoRole)->exists();
-
-            if ($hasAlumnoRole && count($user->roles) > 0) {
-                throw new \Exception('El usuario ya tiene el rol de alumno y no puede tener más roles.');
-            }
-        });
+        
     }
     public static function obtenerUsuariosPorRolYCiclo($rol, $cycle)
     {
@@ -132,4 +136,14 @@ class User extends Authenticatable
         // Asignar un rol específico al usuario
         $usuario->roles()->attach(Role::where('name', $rol)->first());
     }
+
+    public static function countUsersWithoutRole()
+{
+    $usersWithoutRole = DB::table('users')
+        ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+        ->whereNull('role_user.role_id')
+        ->count();
+
+    return $usersWithoutRole;
+}
 }

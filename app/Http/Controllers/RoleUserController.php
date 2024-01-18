@@ -16,9 +16,11 @@ class RoleUserController extends Controller
      */
     public function index()
     {
+        $pagination = config('PAGINATION_COUNT');
+
         $roleUsers = RoleUser::all();
         $roleUsers = RoleUser::orderBy('created_at')->get();
-        $roleUsers = RoleUser::paginate(2);
+        $roleUsers = RoleUser::paginate($pagination);
         $customPaginator = new LengthAwarePaginator(
             $roleUsers->items(),
             $roleUsers->total(),

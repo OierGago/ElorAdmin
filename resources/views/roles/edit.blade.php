@@ -19,8 +19,8 @@
                             <input class="form-control" type="text" name="name" id="name" required/>
                         </div>
                         <div class="btnce d-inline-flex">
-                        <button type="submit" class="btn btn-success btn-sm" name="">Guardar<i class="bi bi-bookmark-check"></i></button>
-        </div>
+                            <button type="submit" class="btn btn-success btn-sm" name="">Guardar<i class="bi bi-bookmark-check"></i></button>
+                        </div>
                     </form>
                 </div>
             </div>

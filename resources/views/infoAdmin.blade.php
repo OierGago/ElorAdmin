@@ -8,7 +8,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Total usuarios dados de alta</div>
+                                Personal del instituto</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalUsers}}</div>
                         </div>
                         <div class="col-auto">
@@ -44,8 +44,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Total roles</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalRoles}}</div>
+                                Usuarios sin rol</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$usersSinRol}}</div>
                         </div>
                         <div class="col-auto">
                             <h1><i class="bi bi-key"></i></h1>

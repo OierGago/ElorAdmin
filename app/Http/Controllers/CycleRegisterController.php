@@ -62,7 +62,15 @@ class CycleRegisterController extends Controller
         $cycle = Cycle::find($cycle_id);
         $modulos = $cycle->modules()->where('year', $request->curso)->get(); 
         foreach ($modulos as $modulo) {
-            if (!($modulo->id == 14 && $request->fct != 'on')) {
+
+            $userAlreadyPassed = DB::table('cycle_register')
+            ->where('user_id', $request->user_id)
+            ->where('module_id', $modulo->id)
+            ->where('year', now()->year - 1)
+            ->where('pass', true)
+            ->exists();
+
+            if (!($modulo->id == 14 && $request->fct != 'on') && !$userAlreadyPassed) {
                 DB::table('cycle_register')->insert(
                     array(
                            'user_id' => $request->user_id, 

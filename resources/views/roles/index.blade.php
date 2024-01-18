@@ -7,13 +7,11 @@
         @foreach ($roles as $role)
         <li>
             <p class="d-inline-flex col-xl-3 col-md-3 col-sm-12 d-inline-flex">{{ $role->name }}</p>
-            <div class="btnce d-inline-flex col-xl-2 col-md-2 col-sm-12">
                         <a class="btn btn-primary btn-sm float-right" href="{{route('roles.show',$role)}}"
                             role="button">Ver <i class="bi bi-eye"></i></a>
-                    </div>
-            <div class="btnce d-inline-flex d-inline-flex col-xl-2 col-md-2 col-sm-12">
-                <a class="btn btn-warning btn-sm float-right" href="{{ route('roles.edit', $role) }}" role="button">Editar <i class="bi bi-pencil"></i></a>
-            </div>
+            <button type="button" class="btn btn-warning btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyModal{{ $role->id }}">
+                Editar <i class="bi bi-pencil"></i>
+            </button>
             <button type="button" class="btn btn-sm btn-danger float-right" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $role->id }}">
                 Borrar <i class="bi bi-trash3"></i>
             </button>
@@ -40,6 +38,35 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="modifyModal{{ $role->id }}" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modifyModalLabel">Editar Rol</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form class="" name="editForm" 
+                            action="{{ route('roles.update', $role) }}" 
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="name">Nombre del Rol</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $role->name) }}" required>
+                                </div>
+                                <!-- Puedes agregar más campos según tus necesidades -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
         </li>
         @endforeach
     </ul>

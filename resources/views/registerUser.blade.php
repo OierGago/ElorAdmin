@@ -1,14 +1,19 @@
 @extends('admin')
 @section('contenido')
 
-<div class="container">
+<div class="container pt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif    
+        <div class="card">
                 <div class="card-header">{{ __('Registro') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('users.create') }}">
                         @csrf
 
                         <div class="row mb-3">

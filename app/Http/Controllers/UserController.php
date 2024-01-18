@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Department;
 use App\Models\User;
 use App\Models\Cycle;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,6 +18,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //
+        $pagination = config('PAGINATION_COUNT');
+
         $query = User::query();
 
         if ($request->has('search')) {
@@ -24,8 +28,8 @@ class UserController extends Controller
                   ->orWhere('dni', 'like', '%' . $request->input('search') . '%');
         }
     
-        $users = $query->paginate(12);
-
+        $users = $query->paginate($pagination);
+        $roles = Role::all();
         $customPaginator = new LengthAwarePaginator(
             $users->items(),
             $users->total(),
@@ -36,26 +40,49 @@ class UserController extends Controller
                 'pageName' => 'page',
             ]
         );
-        return view('users.index',['users'=>$users], compact('customPaginator'));
+        return view('users.index',['users'=>$users], compact('customPaginator','roles'));
     }
     public function index2(Request $request)
     {   
-      
-       // $users = User::All();
-       
+        $pagination = config('PAGINATION_COUNT');
         
-        $users = User::OrderBy('surname','asc')->paginate(15);
-       // $users = User::(15); 
+        $users = User::OrderBy('surname','asc')->paginate($pagination);
+
         return view('users.index2',['users' => $users],compact('users'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $users = User::All();
-        return view('users.create', ['users' => $users]);
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'dni' => 'required|string|max:9|unique:users',
+        ]);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'surname' => $data['surname'],
+            'email' => $data['email'],
+            'password' => Hash::make('Elorrieta00'),
+            'address' => $data['address'],
+            'phone' => $data['phone'],
+            'dni' => $data['dni'],
+        ]);
+
+        return redirect()->back()->with('success', 'Usuario creado con éxito');
+    }
+
+    public function showRegistrationForm()
+    {
+        $departments = Department::all();
+        $cycles = Cycle::all();
+        return view('registerUser', compact('departments', 'cycles'));
     }
 
     /**
@@ -103,7 +130,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user){
+    public function update(Request $request, User $user)
+    {
         // Validar los datos según tus necesidades
         $request->validate([
             'name' => 'required',
@@ -115,23 +143,39 @@ class UserController extends Controller
             'dni' => 'required'
         ]);
 
-        // Actualizar los campos básicos del usuario
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-        $user->address = $request->address;
-        $user->phone = $request->phone;
-        $user->dni = $request->dni;
+        // Verificar si el array de roles es nulo y quitar todos los roles del usuario
+        if ($request->roles === null) {
+            $user->roles()->sync([]);
+        } else {
+            // Verificar si el usuario ya tiene el rol 'Estudiante'
+            $hasStudentRole = $user->hasRole('Estudiante');
 
-        // Actualizar roles del usuario
-        $user->roles()->sync($request->roles);
+            // Verificar si se está intentando agregar roles adicionales cuando ya tiene 'Estudiante'
+            if ($hasStudentRole && count($request->roles) > 1) {
+                return redirect()->back()->with('error', 'No se pueden agregar roles adicionales a un usuario con el rol "Estudiante".');
+            }
+
+            // Actualizar los campos básicos del usuario
+            $user->name = $request->name;
+            $user->surname = $request->surname;
+            $user->email = $request->email;
+            $user->address = $request->address;
+            $user->phone = $request->phone;
+            $user->dni = $request->dni;
+
+            // Actualizar roles del usuario
+            $user->roles()->sync($request->roles);
+            
+        }
 
         // Guardar los cambios
         $user->save();
 
         // Redirigir a la vista de detalles del usuario o a donde desees
-        return redirect()->route('users.index', $user);
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado con éxito');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

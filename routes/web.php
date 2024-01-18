@@ -26,10 +26,10 @@ Route::get('/admin', function () {
         $alumnos = User::obtenerUsuariosPorRol('estudiante')->count();
         $usuariosMatriculados = $alumnos - User::studentsNotInCycleRegister()->count();
         $totalCycles = Cycle::count();
-        $totalRoles = Role::count();
+        $usersSinRol = User::countUsersWithoutRole();
         $totalModules = Module::count();
         $totalDepartment=Department::count();
-    return view('infoAdmin',  compact('totalDepartment','totalUsers','totalRoles','totalModules','totalCycles', 'usuariosMatriculados'));
+    return view('infoAdmin',  compact('totalDepartment','totalUsers','usersSinRol','totalModules','totalCycles', 'usuariosMatriculados'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -78,5 +78,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/users', [UserController::class, 'index2']);
 Route::get('/departments', [DepartmentController::class, 'index2']);
+
+Route::get('/registerUser', [UserController::class, 'showRegistrationForm'])->name('registerUser');
+Route::post('/admin/users/create', [UserController::class, 'create']);
 
 Route::get('/cycles', [CycleController::class, 'index2']);
