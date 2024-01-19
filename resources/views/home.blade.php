@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark ">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
@@ -22,14 +22,18 @@
         </ul>
     </div>
 </div>
-<div class="contentAdmin col-auto col-md-9 col-xl-10 px-sm-10">
+<div class="contentAdmin col-auto col-md-9 col-xl-10 px-sm-10 pt-4">
 
     <div class="container-fluid">
         <div class="form_div">
-            <h1>Bienvenid@ {{ Auth::user()->name}}</h1>
+            <h1>Información para {{ Auth::user()->name}} {{Auth::user()->surname}}</h1>
+            {{--
+
+            Apartado /home de los profesores  
+
+            --}}
             @if(Auth::user()->hasRole('Profesor'))
-            <h2>Información para Profesor</h2>
-            <h5>Departamento: {{ Auth::user()->department->name }}</h5>
+            <h3>Departamento: {{ Auth::user()->department->name }}</h3>
                 <div class="accordion" id="cycleAccordion">
                     @foreach($cycleName as $cycle)
                         <div class="accordion-item">
@@ -101,6 +105,11 @@
                         </div>
                     @endforeach
                 </div>
+            {{--
+                
+            Apartado de /home de los estudiantes
+                
+            --}}
             @elseif(Auth::user()->hasRole('Estudiante'))
             <h2>Información para Alumno</h2>
             <p>Ciclo Formativo: {{ Auth::user()->cycle->name}}</p>

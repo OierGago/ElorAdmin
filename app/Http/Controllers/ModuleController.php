@@ -79,7 +79,7 @@ class ModuleController extends Controller
     {
         $module->name = $request->name;
         $module->save();
-        return view('modules.index',['module'=>$module]);
+        return redirect()->back()->with('success', 'Módulo modificado con éxito');
     }
 
     /**
@@ -87,7 +87,11 @@ class ModuleController extends Controller
      */
     public function destroy(Module $module)
     {
-        $module->delete();
-        return redirect()->route('modules.index');
+        try {
+            $module->delete();
+            return redirect()->back()->with('success', 'Módulo eliminado con éxito');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'No se pudo eliminar el módulo');
+        }
     }
 }

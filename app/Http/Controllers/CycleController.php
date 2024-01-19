@@ -96,7 +96,7 @@ class CycleController extends Controller
         $cycle->name = $request->name;
         $cycle->department_id = $request->department_id;
         $cycle->save();
-        return redirect()->route('cycles.index');
+        return redirect()->back()->with('success', 'Ciclo modificado con éxito');
 
     }
 
@@ -108,9 +108,9 @@ class CycleController extends Controller
         //
         try {
             $cycle->delete();
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Ciclo eliminado con éxito');
         } catch (\Throwable $th) {
-            return redirect()->back() - with('error', 'No se pudo borrar el cyclo');
+            return redirect()->back() - with('error', 'No se pudo eliminar el ciclo');
         }
     }
 }

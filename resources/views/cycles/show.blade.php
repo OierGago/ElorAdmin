@@ -12,6 +12,7 @@
         @endforeach
     </div>
     <div class="profesores">
+
         <table>
             <thead>
                 <tr>
@@ -22,23 +23,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($cycle->users as $profesor) 
+            @foreach ($cycle->profesores as $user)
+            
                     <tr>
-                        <td>{{$profesor->surname}}, {{$profesor->name}}</td>
-                        <td>{{$profesor->email}}</td>
-                        <td>{{$profesor->dni}}</td>
+                        <td>{{$user->surname}}, {{$user->name}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->dni}}</td>
                         <td>
                             <div class="btnce d-inline-flex col-xl-2 col-md-3 col-sm-12">
-                                <a class="btn btn-primary btn-sm float-right" href="{{route('users.show',$profesor)}}"
+                                <a class="btn btn-primary btn-sm float-right" href="{{route('users.show',$user)}}"
                                     role="button">Ver
                                     <i class="bi bi-eye"></i></a>
                             </div>
                         </td>
-                    </tr>  
+                    </tr>
+                   
                 @endforeach
             </tbody>
         </table>
-       
+
     </div>
 </div>
 

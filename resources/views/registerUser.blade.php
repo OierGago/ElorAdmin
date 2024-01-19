@@ -1,6 +1,18 @@
 @extends('admin')
 @section('contenido')
+<style>
+    .contenedor {
+        position: relative;
+    }
 
+    .imagenR {
+        width: 100%; /* Ajusta el ancho de acuerdo a tus necesidades */
+        height: auto; /* Mantiene la proporción original de la imagen */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+</style>
 <div class="container pt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -91,7 +103,6 @@
 
                             <div class="col-md-6">
                                 <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
-
                                 @error('dni')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -99,16 +110,32 @@
                                 @enderror
                             </div>
                         </div>
-                        
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar usuario') }}
-                                </button>
+
+                        <div>
+                            <div>    
+
+                            <div class="row mb-3">
+                                <label for="birthdate" class="col-md-4 col-form-label text-md-end">{{ __('Fecha de nacimiento') }}</label>
+                                <div class="col-md-6">
+                                    <div class="contenedor">
+                                        <img src="{{ asset('images/earth.png') }}" alt="Earth" id="div1" class="imagen imagenR img-fluid">
+                                        <img src="{{ asset('images/sun.png') }}" alt="Sun" class="imagen imagenR img-fluid">
+                                        <img src="{{ asset('images/sun.png') }}" alt="Sun" class="imagen img-fluid">
+                                    </div>
+
+                                    Rotate: <br>
+                                    <input type="date" class="form-control" oninput="rotate(this.value, {{$numDias}})" onchange="rotate(this.value, {{$numDias}})" /><br>
+                                </div>
+                            </div>
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Registrar usuario') }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
-                        {{--<?php echo date('l jS \of F Y')?>--}}
                     </form>
                 </div>
             </div>

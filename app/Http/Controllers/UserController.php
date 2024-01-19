@@ -80,9 +80,12 @@ class UserController extends Controller
 
     public function showRegistrationForm()
     {
+        $ano = now()->year;
+        $numDias = date('L', strtotime("$ano-12-31")) ? 366 : 365;
+
         $departments = Department::all();
         $cycles = Cycle::all();
-        return view('registerUser', compact('departments', 'cycles'));
+        return view('registerUser', compact('departments', 'cycles', 'numDias'));
     }
 
     /**
@@ -191,9 +194,9 @@ class UserController extends Controller
         //
         try {
             $user->delete();
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Usuario '.$user->name.' '.$user->surname.' borrado con exito');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'No se pudo borrar el usuario');
+            return redirect()->back()->with('error', 'No se pudo eliminar el usuario');
         }
     }
    

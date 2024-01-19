@@ -20,7 +20,7 @@ class ProfessorCycle extends Model
     }
 
     public function user() {
-        return $this->belongsToMany(User::class, 'users','user_id', 'id');
+        return $this->belongsToMany(User::class, 'user_id', 'id');
     }
 
     public function module() {

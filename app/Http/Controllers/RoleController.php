@@ -98,7 +98,7 @@ class RoleController extends Controller
         //
         $role->name = $request->name;
         $role->save();
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->with('success', 'Rol editado con éxito');
 
     }
 
@@ -110,9 +110,9 @@ class RoleController extends Controller
         //
         try {
             $role->delete();
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Rol eliminado con éxito');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'No se pudo borrar el role ');
+            return redirect()->back()->with('error', 'No se pudo eliminar el rol');
         }
     }
 }

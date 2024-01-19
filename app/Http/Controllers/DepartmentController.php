@@ -119,7 +119,7 @@ class DepartmentController extends Controller
         ]);
         $department->name = $request->name;
         $department->save();
-        return redirect()->route('departments.index');
+        return redirect()->back()->with('success', 'Departamento modificado con éxito');
     }
 
     /**
@@ -129,9 +129,9 @@ class DepartmentController extends Controller
     {
         try {
             $department->delete();
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Departamento eliminado con éxito');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'No se pudo borrar el departamento');
+            return redirect()->back()->with('error', 'No se pudo eliminar el departamento');
         }
     }
 }

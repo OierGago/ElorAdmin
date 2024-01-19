@@ -1,6 +1,6 @@
 @extends('admin')
 @section('contenido')
-<div class="container-fluid">
+<div class="container-fluid pt-4">
     <div class="row">
         <div class="col-xl-4 col-md-12 col-sm-8 mb-4">
             <div class="card border-left border-primary shadow h-100 py-2">

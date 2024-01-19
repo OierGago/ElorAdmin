@@ -15,13 +15,28 @@ class Cycle extends Model
     {
         return $this->belongsToMany(Module::class, 'cycle_module');
     }
+    // public function modules()
+    // {
+    //     return $this->belongsToMany(Module::class, 'cycle_module');
+    // }
 
-    public function users(): HasMany
+    public function profesores()
     {
-        return $this->hasMany(User::class, 'cycle_id');
+        return $this->belongsToMany(User::class, 'professor_cycle')->distinct();
+    }
+
+    public function alumnos()
+    {
+        return $this->belongsToMany(User::class, 'cycle_register')->distinct();
+    }
+
+    public function alumnos_modulos()
+    {
+        return $this->belongsToMany(User::class, 'cycle_register');
     }
 
     public function usersCycleRegister()
+
     {
         return $this->belongsToMany(User::class, 'cycle_register');
     }
@@ -35,7 +50,5 @@ class Cycle extends Model
         return $this->belongsToMany(CycleRegister::class, 'cycle_id');
     }
 
-    public function professorCycles() {
-        return $this->hasMany(ProfessorCycle::class, 'cycle_id');
-    }
+    
 }
