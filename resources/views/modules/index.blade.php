@@ -96,7 +96,7 @@
         </div>
         <div class="div-btn-crear d-inline-flex">
             <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('register') }}" role="button">Registar Usuario <i class="bi bi-plus-square"></i></a>
+            <a class="btn btn-success btn-sm float-right" href="{{ route('registerUser') }}" role="button">Registar Usuario <i class="bi bi-plus-square"></i></a>
         </div>
         </div>
         <div class="div-btn-crear d-inline-flex">
