@@ -63,6 +63,7 @@ class UserController extends Controller
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'dni' => 'required|string|max:9|unique:users',
+            'birthdate' => 'required'
         ]);
 
         $user = User::create([
@@ -73,6 +74,7 @@ class UserController extends Controller
             'address' => $data['address'],
             'phone' => $data['phone'],
             'dni' => $data['dni'],
+            'birthdate' => $data['birthdate']
         ]);
 
         return redirect()->back()->with('success', 'Usuario creado con éxito');
@@ -101,6 +103,7 @@ class UserController extends Controller
         $user->phone = $request->input('phone');
         $user->roles = $request->input('role');
         $user->dni = $request->input('dni');
+        $user->birthdate = $request->input('birthdate');
         $user->curso = $request->input('curso');
         $user->fct = $request->input('fct');
         $user->save();
@@ -143,7 +146,8 @@ class UserController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'roles' => 'array', // Asegúrate de que 'roles' sea un array
-            'dni' => 'required'
+            'dni' => 'required',
+            'birthdate' => 'required'
         ]);
 
         // Verificar si el array de roles es nulo y quitar todos los roles del usuario

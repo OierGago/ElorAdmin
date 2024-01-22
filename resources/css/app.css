@@ -69,3 +69,14 @@
 .alinear-derecha{
     align-content: end;
 }
+.contenedorImg {
+    position: relative;
+}
+
+.imagenR {
+    width: 100%; /* Ajusta el ancho de acuerdo a tus necesidades */
+    height: auto; /* Mantiene la proporción original de la imagen */
+    position: absolute;
+    top: 0;
+    left: 0;
+}

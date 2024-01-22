@@ -99,8 +99,8 @@
         <li class="dropdown-item dropdown-toggle dropdown-start">
             Tema
             <ul class="dropdown-menu dropdown-submenu dropdown-submenu-left">
-                <li class="dropdown-item">Claro</li>
-                <li class="dropdown-item">Oscuro</li>
+                <li class="dropdown-item" onclick="cambiarTema('light')">Claro</li>
+                <li class="dropdown-item" onclick="cambiarTema('dark')">Oscuro</li>
             </ul>
         </li>
         @auth
@@ -146,3 +146,17 @@
 </body>
 
 </html>
+
+<script>
+    function cambiarTema(tipoTema) {
+        // Remueve todas las clases relacionadas con el tema en documentElement
+        document.documentElement.classList.remove('light', 'dark');
+
+        // Agrega la clase correspondiente al tema seleccionado
+        if (tipoTema === 'light') {
+            document.documentElement.classList.add('light');
+        } else if (tipoTema === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    }
+</script>

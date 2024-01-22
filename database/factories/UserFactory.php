@@ -29,6 +29,8 @@ class UserFactory extends Factory
         $dniLetters = str_shuffle('ABCDEFGHJKLMNPQRSTVWXYZ');
         $dni = $dniLetters[0];
 
+        $birthdate = $faker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
+
         return [
             'name' => $faker->firstName(),
             'surname' => $faker->lastName(),
@@ -38,6 +40,7 @@ class UserFactory extends Factory
             'phone' => fake()->numerify('6########'),
             'password' => static::$password ??= Hash::make('Elorrieta00'),
             'dni' => fake()->numerify('########'). $dni,
+            'birthdate' => $birthdate,
             'remember_token' => Str::random(10),
             'department_id' => fake()->numberBetween(1,4),
         ];

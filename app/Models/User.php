@@ -26,7 +26,7 @@ class User extends Authenticatable
 
     public function cycles()
     {
-        return $this->belongsToMany(Cycle::class, 'cycle_register');
+        return $this->belongsToMany(Cycle::class, 'cycle_register')->distinct();
     }
 
     public function roles()
@@ -77,6 +77,7 @@ class User extends Authenticatable
         'address',
         'phone',
         'dni',
+        'birthdate',
         'department_id',
     ];
 

@@ -106,6 +106,11 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="birthdate">Fecha de nacimiento</label>
+                                        <input type="text" class="form-control" id="birthdate" name="birthdate" value="{{ old('birthdate', $user->birthdate) }}" required>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label>Roles</label>
                                         @foreach($roles as $role)
                                             <div class="form-check">

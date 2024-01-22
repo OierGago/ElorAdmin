@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('phone');
             $table->string('dni');
+            $table->date('birthdate')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments')
                 ->onDelete('cascade')->onUpdate('cascade');

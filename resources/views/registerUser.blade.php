@@ -1,18 +1,5 @@
 @extends('admin')
 @section('contenido')
-<style>
-    .contenedor {
-        position: relative;
-    }
-
-    .imagenR {
-        width: 100%; /* Ajusta el ancho de acuerdo a tus necesidades */
-        height: auto; /* Mantiene la proporción original de la imagen */
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-</style>
 <div class="container pt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -117,14 +104,13 @@
                             <div class="row mb-3">
                                 <label for="birthdate" class="col-md-4 col-form-label text-md-end">{{ __('Fecha de nacimiento') }}</label>
                                 <div class="col-md-6">
-                                    <div class="contenedor">
-                                        <img src="{{ asset('images/earth.png') }}" alt="Earth" id="div1" class="imagen imagenR img-fluid">
+                                    <div class="contenedorImg">
+                                        <img src="{{ asset('images/earth.png') }}" alt="Earth" id="div1" class="imagen img-fluid">
                                         <img src="{{ asset('images/sun.png') }}" alt="Sun" class="imagen imagenR img-fluid">
-                                        <img src="{{ asset('images/sun.png') }}" alt="Sun" class="imagen img-fluid">
                                     </div>
 
                                     Rotate: <br>
-                                    <input type="date" class="form-control" oninput="rotate(this.value, {{$numDias}})" onchange="rotate(this.value, {{$numDias}})" /><br>
+                                    <input type="date" class="form-control" name="birthdate" oninput="rotate(this.value, {{$numDias}})" onchange="rotate(this.value, {{$numDias}})" /><br>
                                 </div>
                             </div>
 

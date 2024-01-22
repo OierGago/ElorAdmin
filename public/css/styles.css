@@ -8,25 +8,29 @@ body {
 .app2 {
     margin-top: 10em;
 }
+
 .app {
     flex: 1;
 }
 
-.moduleTitle{
+.moduleTitle {
     padding-top: 5%;
 
 }
-.profesores{
+
+.profesores {
     display: grid;
     align-content: center;
     margin-left: 5%;
     margin-right: 10%;
     margin-top: 3%;
 }
-.space{
+
+.space {
     margin-right: 10%;
 }
-.modulos{
+
+.modulos {
     margin-top: 5%;
     display: flex;
     flex-direction: row;
@@ -34,31 +38,37 @@ body {
     flex-wrap: wrap;
     align-items: center;
 }
-.margin-carousel{
+
+.margin-carousel {
     margin-top: 10%;
     margin-left: 35%;
 }
+
 .logo_elorrieta {
-    max-width: 50px; 
-    max-height: 50px; 
+    max-width: 50px;
+    max-height: 50px;
     width: auto;
     height: auto;
 }
+
 .logo_settings {
-    max-width: 20px; 
-    max-height: 20px; 
+    max-width: 20px;
+    max-height: 20px;
     width: auto;
     height: auto;
 }
+
 .title_elorrieta {
-    max-width: 120px; 
-    max-height: 120px; 
+    max-width: 120px;
+    max-height: 120px;
     width: auto;
     height: auto;
 }
+
 .logo-container {
     margin-left: 20px;
 }
+
 .menu {
     position: relative;
     float: right;
@@ -78,12 +88,12 @@ body {
     background-color: #f9f9f9;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     min-width: 120px;
-    z-index: 1000; 
+    z-index: 1000;
     padding: 8px 0;
 }
 
 .menu:hover .dropdown,
-.dropdown.active  {
+.dropdown.active {
     display: block;
     position: absolute;
 }
@@ -91,25 +101,31 @@ body {
 .dropdown-menu li:hover {
     background-color: #c8c8c8;
 }
+
 .custom-dropdown {
-    left: -50px; 
+    left: -50px;
 }
+
 .dropdown-menu li {
     position: relative;
 }
+
 .dropdown-menu .dropdown-submenu {
     display: none;
     position: absolute;
     left: 100%;
     top: -7px;
 }
+
 .dropdown-menu .dropdown-submenu-left {
     right: 100%;
     left: auto;
 }
-.dropdown-menu > li:hover > .dropdown-submenu {
+
+.dropdown-menu>li:hover>.dropdown-submenu {
     display: block;
-} 
+}
+
 .dropdown-submenu {
     position: relative;
 }
@@ -124,31 +140,38 @@ body {
 .submenu-toggle::after {
     display: inline-block;
     margin-left: 5px;
-    content: '\25B6'; /* Icono de flecha hacia la derecha (puedes cambiarlo según tu preferencia) */
+    content: '\25B6';
+    /* Icono de flecha hacia la derecha (puedes cambiarlo según tu preferencia) */
 }
 
 .submenu-toggle.collapsed::after {
-    content: '\25BC'; /* Icono de flecha hacia abajo */
+    content: '\25BC';
+    /* Icono de flecha hacia abajo */
 }
 
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Establece el alto mínimo del cuerpo al 100% de la altura visible del viewport */
+    min-height: 100vh;
+    /* Establece el alto mínimo del cuerpo al 100% de la altura visible del viewport */
     margin: 0;
 }
 
 .container {
-    flex: 1; /* Hace que el contenedor principal ocupe todo el espacio restante */
+    flex: 1;
+    /* Hace que el contenedor principal ocupe todo el espacio restante */
 }
 
 footer {
-    background-color: #f8f9fa; /* Cambia esto según el color de fondo deseado para el footer */
-    color: #343a40; /* Cambia esto según el color de texto deseado para el footer */
+    background-color: #f8f9fa;
+    /* Cambia esto según el color de fondo deseado para el footer */
+    color: #343a40;
+    /* Cambia esto según el color de texto deseado para el footer */
     padding: 10px;
     text-align: center;
     width: 100%;
 }
+
 .table-with-padding {
     width: 100%;
     border-collapse: collapse;
@@ -157,5 +180,32 @@ footer {
 .table-with-padding th,
 .table-with-padding td {
     padding: 5px;
-    border: 1px solid #ddd; /* Agregar bordes para mejorar la apariencia */
+    border: 1px solid #ddd;
+    /* Agregar bordes para mejorar la apariencia */
+}
+
+
+.Rectangle6 {
+    width: 80%;
+    height: auto;
+    background: white;
+    box-shadow: 10px 10px 12px 2px rgba(0, 0, 0, 0.25);
+    margin: 10px;
+    padding: 3em;
+}
+
+.Rectangle7 {
+    width: 1031px;
+    height: 687px;
+    background: #D9D9D9;
+}
+
+.Imagen5 {
+    width: 616px;
+    height: 628px;
+    border: 2px black solid;
+    padding: 10px;
+}
+.userTable{
+    width: 30%;
 }
