@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark ">
+<div class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 bg-dark ">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
@@ -22,7 +22,7 @@
         </ul>
     </div>
 </div>
-<div class="contentAdmin col-auto col-md-9 col-xl-10 px-sm-10 pt-4">
+<div class="contentAdmin col-auto col-sm-8 col-md-10 col-xl-10 px-sm-1 pt-4">
 
     <div class="container-fluid">
         <div class="form_div">
@@ -118,9 +118,12 @@
 
             --}}
             @elseif(Auth::user()->hasRole('Estudiante'))
-            <h2>Información para Alumno</h2>
             <h3>Ciclos Matriculados:</h3>
             <!--TODO -->
+            
+            @if(count(Auth::user()->cycles) != 0)
+
+            
             <?php $firstCycle = Auth::user()->cycles[0]; ?>
 
             <div class="accordion">
@@ -133,8 +136,8 @@
                     </h2>
                     <div id="collapse" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <table class="table-with-padding table table-borderless">
-                                <thead>
+                            <table  class="table table-striped">
+                                <thead >
                                     <tr>
                                         <th scope="col">Modulo</th>
                                         <th scope="col">Nombre de Profesor</th>
@@ -156,10 +159,27 @@
                                         @endphp
                                         
                                         @foreach ($cycleRegister as $p)
+
+                                        @php
+                                        $teacher = DB::table('professor_cycle as pc')
+                                        ->join('users as u', 'u.id','=','pc.user_id' )
+                                        ->select('u.*')
+                                        ->where([
+                                            ['pc.module_id' ,'=',$p->module_id],
+                                            ['pc.cycle_id','=',$p->cycle_id]    
+                                        ])
+                                        ->first()
+                                        @endphp
+                                        
                                             <tr>
                                                 <td>{{ isset($p->name) ? htmlspecialchars($p->name) : 'N/A' }}</td>
-                                                <td>{{ $module->teacher_name }}</td>
-                                                <td>{{ $module->teacher_email }}</td>
+                                                @if($teacher == null)
+                                                <td></td>
+                                                <td></td>
+                                                @else
+                                                <td>{{ $teacher->name }}</td>
+                                                <td>{{ $teacher->email }}</td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     @endforeach
@@ -169,7 +189,9 @@
                     </div>
                 </div>
             </div>
-
+            @else
+            <h3>No esta asociado en ningun ciclo</h3>
+            @endif
             @endif
         </div>
     </div>

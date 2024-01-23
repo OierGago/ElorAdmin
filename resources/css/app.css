@@ -80,3 +80,8 @@
     top: 0;
     left: 0;
 }
+#menu .nav-link.active {
+    background-color: #007bff; /* Color de fondo para el enlace activo */
+    color: #fff; /* Color de texto para el enlace activo */
+
+}

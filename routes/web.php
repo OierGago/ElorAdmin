@@ -46,7 +46,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
     Route::resources([    ]);
     });
     // 'middleware' => ['auth', 'admin']
