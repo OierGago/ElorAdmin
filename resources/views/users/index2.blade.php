@@ -3,7 +3,7 @@
 
 <div class="pt-4 px-0">
     <div class="profesores">
-        <table class="table table-striped">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th scope="col">Apellido</th>

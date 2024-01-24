@@ -11,19 +11,27 @@ class ProfessorCycle extends Model
 
     protected $table = 'professor_cycle';
 
-    protected $primaryKey = ['user_id', 'cycle_id', 'module_id']; // Definir la clave primaria personalizada
+    // Definir la clave primaria personalizada como un array asociativo
+    protected $primaryKey = ['user_id', 'cycle_id', 'module_id'];
 
     // Si es necesario, definir el nombre del campo que representa la relación
     protected $foreignKey = ['user_id', 'cycle_id', 'module_id'];
-    public function cycle() {
-        return $this->belongsToMany(Cycle::class, 'cycles','cycle_id', 'id');
+
+    public $incrementing = false; // Desactivar la autoincrementación de la clave primaria
+
+    // Si tus relaciones son de muchos a muchos, usa belongsToMany
+    public function cycle()
+    {
+        return $this->belongsTo(Cycle::class, 'cycle_id', 'id');
     }
 
-    public function user() {
-        return $this->belongsToMany(User::class, 'user_id', 'id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function module() {
-        return $this->belongsToMany(Module::class, 'modules', 'module_id', 'id');
+    public function module()
+    {
+        return $this->belongsTo(Module::class, 'module_id', 'id');
     }
 }

@@ -14,16 +14,25 @@ class DepartmentApiController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $departments = Department::orderBy('id', 'asc')->get();
-        return response()->json(['departments' => $departments])
-            ->setStatusCode(Response::HTTP_OK);
-    }
+{
+    $paginationCount = 50; // Puedes ajustar este valor según tus necesidades.
+
+    $departments = Department::orderBy('id', 'asc')->paginate($paginationCount);
+
+    return response()->json([
+        'departments' => $departments->items(),
+        'total' => $departments->total(),
+        'per_page' => $paginationCount, // Estableces el número de elementos por página.
+        'current_page' => $departments->currentPage(),
+        'last_page' => $departments->lastPage(),
+    ])->setStatusCode(Response::HTTP_OK);
+}
+
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+        public function store(Request $request)
     {
         //
             $department = new Department();

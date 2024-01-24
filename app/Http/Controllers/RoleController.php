@@ -109,6 +109,9 @@ class RoleController extends Controller
     {
         //
         try {
+            if($role->name=='Administrador' ||$role->name=='Profesor'||$role->name=='Estudiante'){
+                return redirect()->back()->with('error', 'No se puede eliminar ese rol');
+            }
             $role->delete();
             return redirect()->back()->with('success', 'Rol eliminado con éxito');
         } catch (\Throwable $th) {

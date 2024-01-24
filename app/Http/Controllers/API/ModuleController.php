@@ -13,10 +13,20 @@ class ModuleController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $modules = Module::orderBy('id', 'asc')->get();
-        return response()->json(['modules'=>$modules])->setStatusCode(Response::HTTP_OK);
-    }
+{
+    $paginationCount = 50; // Puedes ajustar este valor según tus necesidades.
+
+    $modules = Module::orderBy('id', 'asc')->paginate($paginationCount);
+
+    return response()->json([
+        'modules' => $modules->items(),
+        'total' => $modules->total(),
+        'per_page' => $paginationCount, // Estableces el número de elementos por página.
+        'current_page' => $modules->currentPage(),
+        'last_page' => $modules->lastPage(),
+    ])->setStatusCode(Response::HTTP_OK);
+}
+
 
     /**
      * Store a newly created resource in storage.

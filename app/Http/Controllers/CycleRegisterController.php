@@ -76,7 +76,7 @@ class CycleRegisterController extends Controller
                            'user_id' => $request->user_id, 
                            'cycle_id' => $request->cycle_id,
                            'module_id' => $modulo->id,
-                           'year' => now()->year,
+                           'year' => now()->format('Y-m-d'),
                     )
                );
             }

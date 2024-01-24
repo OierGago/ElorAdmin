@@ -32,8 +32,9 @@
             </div>
             <div class="container">
 
-                <a class="navbar-brand" href="/admin">Panel de Administración</a>
-
+            @if (Auth::user() != null && Auth::user()->hasRole('Administrador'))    
+            <a class="navbar-brand" href="/admin">Panel de Administración</a>
+            @endif
                 <!-- <a class="navbar-brand" href="{{ url('/admin') }}">{{ config('app.name', 'Laravel') }}
                 </a> -->
 
@@ -121,7 +122,7 @@
     </div>
     <script src="{{ asset('js/script_menu.js') }}"></script>
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-body-secondary">© 2023 Elorrieta-Errekamari</p>
+        <p class="col-md-4 mb-0 text-body-secondary ">© 2023 Elorrieta-Errekamari</p>
 
         <a href="https://www.elorrieta.eus/"><img src="{{ asset('images/title_elorrieta.png') }}"
                 alt="Titulo de la empresa" class="title_elorrieta"></a>

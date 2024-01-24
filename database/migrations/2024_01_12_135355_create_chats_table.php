@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('is_private');
+            $table->unsignedBigInteger('creator_id')->unsigned();
+            
+            $table->foreign('creator_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

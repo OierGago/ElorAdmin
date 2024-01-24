@@ -13,12 +13,20 @@ class RoleController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-        $roles = Role::orderBy('id', 'asc')->get();
-        return response()->json(['roles' => $roles])
-            ->setStatusCode(Response::HTTP_OK);
-    }
+{
+    $paginationCount = 50; // Puedes ajustar este valor según tus necesidades.
+
+    $roles = Role::orderBy('id', 'asc')->paginate($paginationCount);
+
+    return response()->json([
+        'roles' => $roles->items(),
+        'total' => $roles->total(),
+        'per_page' => $paginationCount, // Estableces el número de elementos por página.
+        'current_page' => $roles->currentPage(),
+        'last_page' => $roles->lastPage(),
+    ])->setStatusCode(Response::HTTP_OK);
+}
+
 
     /**
      * Store a newly created resource in storage.

@@ -15,7 +15,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $request->user()->roles()->where('nombre', 'admin')->exists()) {
+        if ($request->user() && $request->user()->hasRole('Administrador')) {
             return $next($request);
         }
         return redirect('/');

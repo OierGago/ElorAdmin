@@ -15,13 +15,14 @@
                 </h2>
                 <div id="{{$cycle->name}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        @foreach ($cycle->modules->sortBy('name') as $modules)
-                        <p>{{$modules->name}}</p>
-                        @endforeach
+                        <ul class="list-group">
+                            @foreach ($cycle->modules->sortBy('name') as $modules)
+                            <li class="list-group-item">{{$modules->name}}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
-
             @endforeach
         </div>
     </div>

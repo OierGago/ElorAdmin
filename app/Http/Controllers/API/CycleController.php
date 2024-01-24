@@ -14,11 +14,19 @@ class CycleController extends Controller
      */
     public function index()
     {
-        //
-        $cycles = Cycle::orderBy('id', 'asc')->get();
-        return response()->json(['cycles' => $cycles])
-            ->setStatusCode(Response::HTTP_OK);
+        $paginationCount = 50; // Puedes ajustar este valor según tus necesidades.
+    
+        $cycles = Cycle::orderBy('id', 'asc')->paginate($paginationCount);
+        
+        return response()->json([
+            'cycles' => $cycles->items(),
+            'total' => $cycles->total(),
+            'per_page' => $paginationCount, // Estableces el número de elementos por página.
+            'current_page' => $cycles->currentPage(),
+            'last_page' => $cycles->lastPage(),
+        ])->setStatusCode(Response::HTTP_OK);
     }
+    
 
     /**
      * Store a newly created resource in storage.

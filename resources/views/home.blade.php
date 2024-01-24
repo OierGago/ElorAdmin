@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 bg-dark ">
+<div class="col-auto col-md-2 col-xl-2 px-sm-2 px-0 adminNav">
     <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
@@ -32,9 +32,53 @@
             Apartado /home de los profesores
 
             --}}
-            @if(Auth::user()->hasRole('Profesor'))
+            @if (!(Auth::user()->hasRole('Estudiante')))
+
             <h3>Departamento: {{ Auth::user()->department->name }}</h3>
-            <div class="accordion" id="cycleAccordion">
+            <?php
+                $mates = DB::table("users as s")
+                    ->select('s.*')
+                    ->where([['s.department_id', '=', Auth::user()->department_id]])
+                    ->orderBy('surname', 'asc')
+                    ->get();
+                ?>
+            <div class="accordion pt-2">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                            Compañeros
+                        </button>
+                    </h2>
+                    <div id="collapse" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <table  class="table table-striped">
+                                <thead >
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">E-Mail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($mates as $mate)
+                                    <tr>
+                                        <td>{{$mate->name}}</td>
+                                        <td>{{$mate->surname}}</td>
+                                        <td>{{$mate->email}}</td>
+                                    </tr>
+                                    @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+            @endif
+
+            @if(Auth::user()->hasRole('Profesor'))
+            
+            <div class="accordion pt-2" id="cycleAccordion">
                 @foreach($cycleName as $cycle)
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading{{ $loop->index }}">
@@ -125,7 +169,6 @@
 
             
             <?php $firstCycle = Auth::user()->cycles[0]; ?>
-
             <div class="accordion">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -153,7 +196,8 @@
                                             ->where([
                                                 ['cr.user_id','=', Auth::user()->id],
                                                 ['cr.cycle_id','=',$firstCycle->id],
-                                                ['cr.module_id','=', $module->id]
+                                                ['cr.module_id','=', $module->id],
+                                                ['cr.year','=', now()->year]
                                             ])
                                             ->get()
                                         @endphp
@@ -189,6 +233,35 @@
                     </div>
                 </div>
             </div>
+            <h3 class="pt-4">Historico de matriculación</h3>
+            @php
+            $historico = DB::table('cycle_register as cr')
+                ->distinct()
+                ->join('cycles as c', 'cr.cycle_id', '=', 'c.id')
+                ->select('c.name', 'cr.year')
+                ->where([
+                    ['cr.user_id','=', Auth::user()->id],
+                ])
+                ->orderBy('cr.year', 'desc')
+                ->get()
+            @endphp
+            <table class="table table-bordered table-striped">
+                <tr>    
+                    <th>Ciclo</th>
+                    <th>Fecha de matriculación</th>
+                    <th>Curso</th>
+                </tr>
+            @foreach ($historico as $h)
+                <tr>
+                    <td>{{$h->name}}</td>
+                    <td>{{$h->year}}</td>
+                    <td><?php 
+                    $fechaCompleta = $h->year; // Suponiendo que $h->year tiene el formato 'Y-m-d'
+                    $anyo = substr($fechaCompleta, 0, 4);?>
+                    {{$anyo}}-{{$anyo+1}}</td>
+                </tr>
+            @endforeach
+            </table>
             @else
             <h3>No esta asociado en ningun ciclo</h3>
             @endif

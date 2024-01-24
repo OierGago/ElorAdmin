@@ -197,6 +197,9 @@ class UserController extends Controller
     {
         //
         try {
+            if($user->id==1){
+                return redirect()->back()->with('error', 'No puedes eliminar ese usuario');
+            }
             $user->delete();
             return redirect()->back()->with('success', 'Usuario '.$user->name.' '.$user->surname.' borrado con exito');
         } catch (\Throwable $th) {

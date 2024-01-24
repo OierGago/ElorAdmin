@@ -21,7 +21,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 
 Route::get('/admin', function () {
-
+    // Verificar si el usuario está autenticado y tiene el rol de administrador
+    if (auth()->check() && auth()->user()->hasRole('Administrador')) {
+        // Permitir el acceso al panel de administración
         $totalUsers = User::count();
         $alumnos = User::obtenerUsuariosPorRol('estudiante')->count();
         $usuariosMatriculados = $alumnos - User::studentsNotInCycleRegister()->count();
@@ -29,7 +31,12 @@ Route::get('/admin', function () {
         $usersSinRol = User::countUsersWithoutRole();
         $totalModules = Module::count();
         $totalDepartment=Department::count();
-    return view('infoAdmin',  compact('totalDepartment','totalUsers','usersSinRol','totalModules','totalCycles', 'usuariosMatriculados'));
+
+        return view('infoAdmin', compact('totalDepartment','totalUsers','usersSinRol','totalModules','totalCycles', 'usuariosMatriculados'));
+    }
+
+    // Si no tiene el rol de administrador, redirigir o mostrar un mensaje de acceso denegado
+    return redirect('/')->with('error', 'Acceso denegado. Debes ser administrador.');
 });
 /*
 |--------------------------------------------------------------------------
@@ -46,20 +53,18 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth','admin'])->group(function () {
-    Route::resources([    ]);
+Route::middleware(['auth'])->group(function () {
+    // Ruta para el panel de administración
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+        // Rutas para el panel de administración
+        Route::resource('departments', DepartmentController::class);
+        Route::resource('cycles', CycleController::class);
+        Route::resource('modules', ModuleController::class);
+        Route::resource('roles', RoleController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('cycleRegister', CycleRegisterController::class);
+        // ... otras rutas de administrador
     });
-    // 'middleware' => ['auth', 'admin']
-Route::group(['prefix' => 'admin'], function () {
-    // Rutas para el panel de administración
-    //Route::get('/', 'AdminController@index')->name('admin.dashboard');
-    Route::resource('departments', DepartmentController::class);
-    Route::resource('cycles', CycleController::class);
-    Route::resource('modules', ModuleController::class);
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('cycleRegister', CycleRegisterController::Class);
-    // ... otras rutas de administrador
 });
 
 

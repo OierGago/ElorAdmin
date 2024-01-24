@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RolesUsersSeeder::class,
             CycleModuleSeeder::class,
+            ChatSeeder::class,
+            ChatUserSeeder::class,
+            ProfessorCycleSeeder::class
         ]);
     }
 }
