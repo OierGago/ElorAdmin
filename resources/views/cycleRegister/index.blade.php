@@ -2,12 +2,12 @@
 @section('contenido')
 
 <div class="container-fluid pt-4">
-    <h1>Matricula a los alumnos</h1>
+    <h1>{{__('RegisterStudent')}}</h1>
     <div class="container-fluid">
             <form method="POST" action="{{ route('cycleRegister.store') }}">
                         @csrf
             <div class="row mb-3">
-                <label for="user_id" class="col-md-4 col-form-label text-md-end">{{ __('Usuario') }}</label>
+                <label for="user_id" class="col-md-4 col-form-label text-md-end">{{ __('Users') }}</label>
 
                 <div class="col-md-6">
                     <select class="form-control" name="user_id" id="user_id">
@@ -48,7 +48,7 @@
             </div>
 
             <div class="row mb-3">
-                <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('Departamento') }}</label>
+                <label for="department_id" class="col-md-4 col-form-label text-md-end">{{ __('Department') }}</label>
 
                 <div class="col-md-6">
                     <select class="form-control" name="department_id" id="department_id">
@@ -65,7 +65,7 @@
             </div>
 
             <div class="row mb-3">
-                <label for="cycle_id" class="col-md-4 col-form-label text-md-end">{{ __('Ciclo') }}</label>
+                <label for="cycle_id" class="col-md-4 col-form-label text-md-end">{{ __('Cycle') }}</label>
 
                 <div class="col-md-6">
                     <select class="form-control" name="cycle_id" id="cycle_id">
@@ -83,7 +83,7 @@
                 <div class="row mb-0">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Registrar usuario') }}
+                            {{ __('RegisterUser') }}
                         </button>
                     </div>
                 </div>

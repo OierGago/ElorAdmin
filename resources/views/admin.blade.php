@@ -7,32 +7,32 @@
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="/admin/departments" class="nav-link align-middle px-0 {{ Request::is('admin/departments') ? 'active' : '' }}">
-                        <i class="fs-4 bi-people"></i><span class="ms-1 d-none d-sm-inline">Departamentos</span>
+                        <i class="fs-4 bi-people"></i><span class="ms-1 d-none d-sm-inline">{{__('Departments')}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/cycles" class="nav-link align-middle px-0 {{ Request::is('admin/cycles') ? 'active' : '' }}">
-                        <i class="fs-4 bi-journal"></i><span class="ms-1 d-none d-sm-inline">Ciclos</span>
+                        <i class="fs-4 bi-journal"></i><span class="ms-1 d-none d-sm-inline">{{__('Cycles')}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/modules" class="nav-link align-middle px-0 {{ Request::is('admin/modules') ? 'active' : '' }}">
-                        <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Modulos</span>
+                        <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">{{__('Modules')}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/roles" class="nav-link align-middle px-0 {{ Request::is('admin/roles') ? 'active' : '' }}">
-                        <i class="fs-4 bi-key"></i><span class="ms-1 d-none d-sm-inline">Roles</span>
+                        <i class="fs-4 bi-key"></i><span class="ms-1 d-none d-sm-inline">{{__('Roles')}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/users" class="nav-link align-middle px-0 {{ Request::is('admin/users') ? 'active' : '' }}">
-                        <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">Usuario</span>
+                        <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">{{__('Users')}}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/cycleRegister" class="nav-link align-middle px-0 {{ Request::is('admin/cycleRegister') ? 'active' : '' }}">
-                        <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">Matricular</span>
+                        <i class="fs-4 bi-book"></i> <span class="ms-1 d-none d-sm-inline">{{__('Matriculate')}}</span>
                         </a>
                     </li>
                 </ul>

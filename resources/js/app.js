@@ -25,3 +25,13 @@ window.rotate = function(value) {
     console.log(dayOfYear);
     console.log(esBisiesto);
 };
+
+function cambiarTema(tipoTema) {
+    document.documentElement.classList.remove('theme-dark', 'theme-light');
+    if (tipoTema === 'dark') {
+        document.documentElement.classList.add('theme-dark');
+    } else if (tipoTema === 'light') {
+        document.documentElement.classList.add('theme-light');
+    }
+    // Aquí también puedes guardar la preferencia del usuario en localStorage o cookies.
+}

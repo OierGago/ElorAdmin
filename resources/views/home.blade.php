@@ -6,17 +6,17 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
                 <a href="/departments" class="nav-link align-middle px-0">
-                    <i class="fs-4 bi-people"></i><span class="ms-1 d-none d-sm-inline">Departamentos</span>
+                    <i class="fs-4 bi-people"></i><span class="ms-1 d-none d-sm-inline">{{__('Departments')}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/cycles" class="nav-link align-middle px-0">
-                    <i class="fs-4 bi-journal"></i><span class="ms-1 d-none d-sm-inline">Ciclos</span>
+                    <i class="fs-4 bi-journal"></i><span class="ms-1 d-none d-sm-inline">{{__('Cycles')}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/users" class="nav-link align-middle px-0">
-                    <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">Usuario</span>
+                    <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">{{__('Users')}}</span>
                 </a>
             </li>
         </ul>
@@ -26,7 +26,7 @@
 
     <div class="container-fluid">
         <div class="form_div">
-            <h1>Información para {{ Auth::user()->name}} {{Auth::user()->surname}}</h1>
+            <h1>{{__('StartInfo')}} {{ Auth::user()->name}} {{Auth::user()->surname}}</h1>
             {{--
 
             Apartado /home de los profesores
@@ -34,7 +34,7 @@
             --}}
             @if (!(Auth::user()->hasRole('Estudiante')))
 
-            <h3>Departamento: {{ Auth::user()->department->name }}</h3>
+            <h3>{{__('Department')}}: {{ Auth::user()->department->name }}</h3>
             <?php
                 $mates = DB::table("users as s")
                     ->select('s.*')
@@ -47,7 +47,7 @@
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse" aria-expanded="false" aria-controls="collapse">
-                            Compañeros
+                            {{__('Coworker')}}
                         </button>
                     </h2>
                     <div id="collapse" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -55,9 +55,9 @@
                             <table  class="table table-striped">
                                 <thead >
                                     <tr>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellido</th>
-                                        <th scope="col">E-Mail</th>
+                                        <th scope="col">{{__('Name')}}</th>
+                                        <th scope="col">{{__('Surname')}}</th>
+                                        <th scope="col">{{__('Email')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,9 +131,9 @@
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Surname</th>
-                                                        <th>Email</th>
+                                                        <th scope="col">{{__('Name')}}</th>
+                                                        <th scope="col">{{__('Surname')}}</th>
+                                                        <th scope="col">{{__('Email')}}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -182,9 +182,9 @@
                             <table  class="table table-striped">
                                 <thead >
                                     <tr>
-                                        <th scope="col">Modulo</th>
-                                        <th scope="col">Nombre de Profesor</th>
-                                        <th scope="col">E-Mail</th>
+                                        <th scope="col">{{__('Modules')}}</th>
+                                        <th scope="col">{{__('ProfessorName')}}</th>
+                                        <th scope="col">{{__('Email')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -233,7 +233,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="pt-4">Historico de matriculación</h3>
+            <h3 class="pt-4">{{__('RegistrationHistory')}}</h3>
             @php
             $historico = DB::table('cycle_register as cr')
                 ->distinct()
@@ -247,9 +247,9 @@
             @endphp
             <table class="table table-bordered table-striped">
                 <tr>    
-                    <th>Ciclo</th>
-                    <th>Fecha de matriculación</th>
-                    <th>Curso</th>
+                    <th>{{__('Cycle')}}</th>
+                    <th>{{__('RegistrationDate')}}</th>
+                    <th>{{__('Curso')}}</th>
                 </tr>
             @foreach ($historico as $h)
                 <tr>
@@ -263,7 +263,7 @@
             @endforeach
             </table>
             @else
-            <h3>No esta asociado en ningun ciclo</h3>
+            <h3>{{__('NoRegistration')}}</h3>
             @endif
             @endif
         </div>

@@ -2,7 +2,7 @@
 @section('contenido')
 
 <div class="container-fluid pt-4">
-    <h1>Listado de ciclos</h1>
+    <h1>{{__('CycleList')}}</h1>
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -19,15 +19,15 @@
                 <li>
                         <p class="d-inline-flex d-inline-flex col-xl-3 col-md-3 col-sm-12">{{ $cycle->name }}</p>
                         <a class="btn btn-primary btn-sm float-right" href="{{route('cycles.show',$cycle)}}"
-                            role="button">Ver <i class="bi bi-eye"></i></a>
+                            role="button">{{__('See')}} <i class="bi bi-eye"></i></a>
                     
 
                     <button type="button" class="btn btn-warning btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyModal{{ $cycle->id }}">
-                    Editar <i class="bi bi-pencil"></i>
+                    {{__('Edit')}} <i class="bi bi-pencil"></i>
                     </button>
         
                     <button type="button" class="btn btn-sm btn-danger float-right" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $cycle->id }}">
-                        Borrar <i class="bi bi-trash3"></i>
+                        {{__('Delete')}} <i class="bi bi-trash3"></i>
                     </button>
 
                     <!-- Modal -->
@@ -35,18 +35,18 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{__('Warning')}}</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Estás seguro de que deseas borrar ciclo "{{ $cycle->name }}"?
+                                    {{__('Are you sure you want to delete cycle?')}} "{{ $cycle->name }}"?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Cancell')}}</button>
                                     <form action="{{ route('cycles.destroy', $cycle) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Borrar</button>
+                                        <button type="submit" class="btn btn-danger">{{__('Delete')}}</button>
                                     </form>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="modifyModalLabel">Editar Ciclo</h1>
+                                    <h1 class="modal-title fs-5" id="modifyModalLabel">{{__('EditCycle')}}</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <form class="" name="editForm" 
@@ -66,11 +66,11 @@
                                     @method('PUT')
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label for="name">Nombre del Ciclo</label>
+                                            <label for="name">{{__('CycleName')}}</label>
                                             <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $cycle->name) }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="department_id">Departamento asociado</label>
+                                            <label for="department_id">{{__('AsociatedDepartment')}}</label>
                                             <select class="form-control" name="department_id">
                                                 @foreach ($departments as $department)
                                                     <option value="{{ $department->id }}" {{ $department->id == $cycle->department_id ? 'selected' : '' }}>
@@ -82,8 +82,8 @@
                                         <!-- Puedes agregar más campos según tus necesidades -->
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Cancell')}}</button>
+                                        <button type="submit" class="btn btn-primary">{{__('SaveChanges')}}</button>
                                     </div>
                                 </form>
                             </div>
@@ -144,14 +144,14 @@
         @endif
     <div class="div-btn-crear d-inline-flex">
         <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('registerUser') }}" role="button">Registar Usuario
+            <a class="btn btn-success btn-sm float-right" href="{{ route('registerUser') }}" role="button">{{__('RegisterUser')}}
                 <i class="bi bi-plus-square"></i></a>
         </div>
     </div>
     <div class="div-btn-crear d-inline-flex">
 
         <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('cycles.create') }}" role="button">Crear ciclo
+            <a class="btn btn-success btn-sm float-right" href="{{ route('cycles.create') }}" role="button">{{__('CreateCycle')}}
                 <i class="bi bi-plus-square"></i></a>
         </div>
     </div>

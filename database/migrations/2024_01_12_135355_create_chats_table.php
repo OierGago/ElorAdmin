@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('is_private');
+            $table->boolean('is_private')->default(false);
             $table->unsignedBigInteger('creator_id')->unsigned();
             
             $table->foreign('creator_id')->references('id')->on('users');

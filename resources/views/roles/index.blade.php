@@ -2,7 +2,7 @@
 @section('contenido')
 
 <div class="container-fluid pt-4">
-    <h1>Listado de Roles</h1>
+    <h1>{{__('RoleList')}}</h1>
     @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -17,12 +17,12 @@
         <li>
             <p class="d-inline-flex col-xl-3 col-md-3 col-sm-12 d-inline-flex">{{ $role->name }}</p>
                         <a class="btn btn-primary btn-sm float-right" href="{{route('roles.show',$role)}}"
-                            role="button">Ver <i class="bi bi-eye"></i></a>
+                            role="button">{{__('See')}} <i class="bi bi-eye"></i></a>
             <button type="button" class="btn btn-warning btn-sm float-right" data-bs-toggle="modal" data-bs-target="#modifyModal{{ $role->id }}">
-                Editar <i class="bi bi-pencil"></i>
+                {{__('Edit')}} <i class="bi bi-pencil"></i>
             </button>
             <button type="button" class="btn btn-sm btn-danger float-right" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $role->id }}">
-                Borrar <i class="bi bi-trash3"></i>
+                {{__('Delete')}} <i class="bi bi-trash3"></i>
             </button>
 
             <!-- Modal -->
@@ -30,18 +30,18 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{__('Warning')}}</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Estás seguro de que deseas borrar rol "{{ $role->name }}"?
+                            {{__('Estás seguro de que deseas borrar rol?')}} "{{ $role->name }}"?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Cancell')}}</button>
                             <form action="{{ route('roles.destroy', $role) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Borrar</button>
+                                <button type="submit" class="btn btn-danger">{{__('Delete')}}</button>
                             </form>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="modifyModalLabel">Editar Rol</h1>
+                            <h1 class="modal-title fs-5" id="modifyModalLabel">{{__('EditRole')}}</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form class="" name="editForm" 
@@ -61,14 +61,14 @@
                             @method('PUT')
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="name">Nombre del Rol</label>
+                                    <label for="name">{{__('RoleName')}}</label>
                                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $role->name) }}" required>
                                 </div>
                                 <!-- Puedes agregar más campos según tus necesidades -->
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Cancell')}}</button>
+                                <button type="submit" class="btn btn-primary">{{__('SaveChanges')}}</button>
                             </div>
                         </form>
                     </div>
@@ -127,14 +127,14 @@
         @endif
         <div class="div-btn-crear d-inline-flex">
         <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('registerUser') }}" role="button">Registar Usuario
+            <a class="btn btn-success btn-sm float-right" href="{{ route('registerUser') }}" role="button">{{__('RegisterUser')}}
                 <i class="bi bi-plus-square"></i></a>
         </div>
     </div>
     <div class="div-btn-crear d-inline-flex">
 
         <div class="btnce">
-            <a class="btn btn-success btn-sm float-right" href="{{ route('roles.create') }}" role="button">Crear rol
+            <a class="btn btn-success btn-sm float-right" href="{{ route('roles.create') }}" role="button">{{__('CreateRol')}}
                 <i class="bi bi-plus-square"></i></a>
         </div>
     </div>

@@ -6,17 +6,17 @@
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
                 <a href="/departments" class="nav-link align-middle px-0 {{ Request::is('/departments') ? 'active' : '' }}">
-                    <i class="fs-4 bi-people"></i><span class="ms-1 d-none d-sm-inline">Departamentos</span>
+                    <i class="fs-4 bi-people"></i><span class="ms-1 d-none d-sm-inline">{{__('Department')}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/cycles" class="nav-link align-middle px-0 {{ Request::is('/cycles') ? 'active' : '' }}">
-                    <i class="fs-4 bi-journal"></i><span class="ms-1 d-none d-sm-inline">Ciclos</span>
+                    <i class="fs-4 bi-journal"></i><span class="ms-1 d-none d-sm-inline">{{__('Cycles')}}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="/users" class="nav-link align-middle px-0 {{ Request::is('/users') ? 'active' : '' }}">
-                    <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">Usuario</span>
+                    <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline">{{__('Users')}}</span>
                 </a>
             </li>
         </ul>
