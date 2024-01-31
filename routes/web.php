@@ -88,3 +88,15 @@ Route::get('/registerUser', [UserController::class, 'showRegistrationForm'])->na
 Route::post('/admin/users/create', [UserController::class, 'create']);
 
 Route::get('/cycles', [CycleController::class, 'index2']);
+
+
+use App\Http\Controllers\LocaleController;
+
+Route::get('/cambiar-idioma/{locale}', [LocaleController::class, 'cambiarIdioma'])->name('cambiar-idioma');
+
+
+
+
+
+
+

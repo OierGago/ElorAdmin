@@ -1,18 +1,16 @@
-<?php
-
-namespace App\Http\Middleware;
+<?php namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 
 class SetLocale
 {
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        if ($request->session()->has('locale')) {
-            app()->setLocale($request->session()->get('locale'));
+        if (session()->has('locale')) {
+            app()->setLocale(session('locale'));
         }
-
         return $next($request);
     }
 }
+
+
